@@ -1,2 +1,16 @@
+<%= simple_form_for :search, url: websites_path, method: :get do |f| %>
+  <div class="search-form-control form-group">
+    <input class="form-control string required" type="text" name="search[query]" id="search_query" />
+    <button name="button" type="submit" class="btn btn-flat">
+      <i class="fas fa-search"></i> Search
+    </button>
+  </div>
+<% end %>
 <h1>NewsScraper#index</h1>
-<p>Find me in app/views/news_scraper/index.html.erb</p>
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <%= render 'search_results_card' article: article %>
+    </li>
+  <% end %>
+</ul>
