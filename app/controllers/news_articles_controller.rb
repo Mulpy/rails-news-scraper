@@ -4,12 +4,13 @@ class NewsArticlesController < ApplicationController
 
     # Scraping logic for each website
     if params[:search].present?
-      @articles += scrape_bbc
+      # @articles += scrape_bbc
       # @articles += scrape_cnn
       # @articles += scrape_reuters
       # @articles += scrape_nyt
       # @articles += scrape_bloomberg
-      @articles += scrape_al_jazeera
+      # @articles += scrape_al_jazeera
+      @articles += scrape_japan_times
     end
     @articles
   end
@@ -129,5 +130,25 @@ class NewsArticlesController < ApplicationController
       end
     end
     @al_jazeera_articles
+  end
+
+  def scrape_japan_times
+    if params[:search].present?
+      @japan_times_articles = []
+      @url = "https://www.japantimes.co.jp/search?query=#{params[:search][:query]}"
+      @html_file = URI.open(@url).read
+      @html_doc = Nokogiri::HTML.parse(@html_file)
+      @html_doc.search('article').each do |element|
+        @doc = Nokogiri::HTML(element.inner_html)
+        @japan_times_title = @doc.css('.article-title').first.text
+        @japan_times_content = @doc.css('.article-body').first.text
+        @japan_times_link = @doc.css('a').first.attr('href')
+        @japan_times_image = @doc.css('img').first.attr('src')
+        @japan_times_published = @doc.css('.publish-date').text
+        @japan_times_articles << NewsArticle.create!(source: 'Japan Times', title: @japan_times_title, content: @japan_times_content, image: @japan_times_image, link: @japan_times_link, published: @japan_times_published)
+      end
+    end
+    @japan_times_articles
+    raise
   end
 end
