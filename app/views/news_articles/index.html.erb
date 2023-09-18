@@ -1,14 +1,8 @@
+ <%= render 'landing' %>
 <div class="container">
-  <%= simple_form_for :search, url:  news_articles_index_path, method: :get do |f| %>
-    <div class="search-form-control form-group">
-      <input class="form-control string required" type="text" name="search[query]" id="search_query" />
-      <button name="button" type="submit" class="btn btn-flat">
-        <i class="fas fa-search"></i> Search
-      </button>
-    </div>
-  <% end %>
   <h1>News Scraper</h1>
   <% if params[:search].present? %>
+    <h2>Showing results for "<%= params[:search][:query].upcase%>"</h2>
     <% @articles.each do |article| %>
       <%= render 'search_results_card', article: article %>
     <% end %>
