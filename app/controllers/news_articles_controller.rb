@@ -20,7 +20,7 @@ class NewsArticlesController < ApplicationController
   def scrape_bbc
     if params[:search].present?
       @bbc_articles = []
-      @url = "https://www.bbc.co.uk/search?q=#{params[:search][:query]}&seqId=95b35ae0-53a6-11ee-8615-ef58fd8d1f98&d=news_gnl"
+      @url = "https://www.bbc.co.uk/search?q=#{params[:search][:query].split.join('+')}&seqId=95b35ae0-53a6-11ee-8615-ef58fd8d1f98&d=news_gnl"
       @html_file = URI.open(@url).read
       @html_doc = Nokogiri::HTML.parse(@html_file)
       @html_doc.search('.ssrcss-rn9nnc-PromoSwitchLayoutAtBreakpoints.et5qctl0').each do |element|
@@ -77,7 +77,7 @@ class NewsArticlesController < ApplicationController
   def scrape_nyt
     if params[:search].present?
       @nyt_articles = []
-      @url = "https://www.nytimes.com/search?query=#{params[:search][:query]}"
+      @url = "https://www.nytimes.com/search?query=#{params[:search][:query].split.join('+')}"
       @html_file = URI.open(@url).read
       @html_doc = Nokogiri::HTML.parse(@html_file)
       @html_doc.search('.css-1i8vfl5').each do |element|
@@ -116,7 +116,7 @@ class NewsArticlesController < ApplicationController
   def scrape_al_jazeera
     if params[:search].present?
       @al_jazeera_articles = []
-      @url = "https://www.aljazeera.com/search/#{params[:search][:query]}"
+      @url = "https://www.aljazeera.com/search/#{params[:search][:query].split.join('%20')}"
       @html_file = URI.open(@url).read
       @html_doc = Nokogiri::HTML.parse(@html_file)
       @html_doc.search('article').each do |element|

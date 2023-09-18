@@ -2,7 +2,7 @@
 <div class="container">
   <h1>News Scraper</h1>
   <% if params[:search].present? %>
-    <h2>Showing results for "<%= params[:search][:query].upcase%>"</h2>
+    <h2>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h2>
     <% @articles.each do |article| %>
       <%= render 'search_results_card', article: article %>
     <% end %>
