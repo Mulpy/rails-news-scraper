@@ -13,11 +13,11 @@ class NewsArticlesController < ApplicationController
       @articles += scrape_al_jazeera
       # @articles += scrape_japan_times
     end
-    @articles
+    params[:source].present? ? @articles.filter : @articles
   end
 
   def filter
-    @articles.select { |article| article.source = params[:source].join }
+    @articles.select { |article| article.source == params[:source].join }
   end
 
   private

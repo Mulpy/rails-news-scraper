@@ -1,28 +1,28 @@
  <%= render 'landing' %>
 <div class="container">
   <h1>News Scraper</h1>
+  <div>
+    <%= form_tag news_articles_path, method: :get, id: 'filter-form' do %>
+      <label>
+        <%= check_box_tag 'source[]', 'BBC', params[:source]&.include?('BBC') %>
+        BBC
+      </label>
+      <label>
+        <%= check_box_tag 'source[]', 'NYT', params[:source]&.include?('NYT') %>
+        NYT
+      </label>
+      <label>
+        <%= check_box_tag 'source[]', 'Al Jazeera', params[:source]&.include?('Al Jazeera') %>
+        Al Jazeera
+      </label>
+      <!-- Add more checkboxes for other filter options as needed -->
+      <%= submit_tag 'Filter' %>
+    <% end %>
+  </div>
   <% if params[:search].present? %>
     <h2>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h2>
     <h3>Search Articles Total: <%= @articles.length  %></h3>
     <div class="d-flex">
-      <div>
-        <%= form_tag news_articles_path, method: :get, id: 'filter-form' do %>
-          <label>
-            <%= check_box_tag 'source[]', 'BBC', params[:source]&.include?('BBC') %>
-            BBC
-          </label>
-          <label>
-            <%= check_box_tag 'source[]', 'NYT', params[:source]&.include?('NYT') %>
-            NYT
-          </label>
-          <label>
-            <%= check_box_tag 'source[]', 'Al Jazeera', params[:source]&.include?('Al Jazeera') %>
-            Al Jazeera
-          </label>
-          <!-- Add more checkboxes for other filter options as needed -->
-          <%= submit_tag 'Filter' %>
-        <% end %>
-      </div>
       <div>
         <ol>
           <% @articles.each do |article| %>
