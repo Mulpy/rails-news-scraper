@@ -4,6 +4,7 @@ class NewsArticlesController < ApplicationController
 
     # Scraping logic for each website
     if params[:search].present?
+      NewsArticle.destroy_all
       @articles += scrape_bbc
       # @articles += scrape_cnn
       # @articles += scrape_reuters
@@ -13,6 +14,10 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_japan_times
     end
     @articles
+  end
+
+  def filter
+    @articles.select { |article| article.source = params[:source].join }
   end
 
   private
@@ -26,9 +31,9 @@ class NewsArticlesController < ApplicationController
       @html_doc.search('.ssrcss-rn9nnc-PromoSwitchLayoutAtBreakpoints.et5qctl0').each do |element|
         @doc = Nokogiri::HTML(element.inner_html)
         @bbc_title = @doc.css('p.ssrcss-6arcww-PromoHeadline.exn3ah96 span').first.text
-        @bbc_content = @doc.xpath('//div/div/p[1]').first.text
+        @bbc_content = @doc.xpath('//div/div/p[1]').present? ? @doc.xpath('//div/div/p[1]').first.text : nil
         @bbc_link = @doc.css('a').first.attr('href')
-        @bbc_image = @doc.css('img').first.attr('src')
+        @bbc_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
         @bbc_published = @doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
         @bbc_articles << NewsArticle.create!(source: 'BBC', title: @bbc_title, content: @bbc_content, image: @bbc_image, link: @bbc_link, published: @bbc_published)
       end
@@ -83,9 +88,9 @@ class NewsArticlesController < ApplicationController
       @html_doc.search('.css-1i8vfl5').each do |element|
         @doc = Nokogiri::HTML(element.inner_html)
         @nyt_title = @doc.css('h4.css-2fgx4k').first.text
-        @nyt_content = @doc.css('p.css-16nhkrn').first.text
+        @nyt_content = @doc.css('p.css-16nhkrn').present? ? @doc.css('p.css-16nhkrn').first.text : nil
         @nyt_link = "https://www.nytimes.com#{@doc.css('a').first.attr('href')}"
-        @nyt_image = @doc.css('img').first.attr('src')
+        @nyt_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
         @nyt_published = @doc.css('span.css-bc0f0m').text
         @nyt_articles << NewsArticle.create!(source: 'NYT', title: @nyt_title, content: @nyt_content, image: @nyt_image, link: @nyt_link, published: @nyt_published)
       end
@@ -122,9 +127,9 @@ class NewsArticlesController < ApplicationController
       @html_doc.search('article').each do |element|
         @doc = Nokogiri::HTML(element.inner_html)
         @al_jazeera_title = @doc.css('span').first.text
-        @al_jazeera_content = @doc.css('p').first.text
+        @al_jazeera_content = @doc.css('p').present? ? @doc.css('p').first.text : nil
         @al_jazeera_link = @doc.css('a').first.attr('href')
-        @al_jazeera_image = @doc.css('img').first.attr('src')
+        @al_jazeera_image = @doc.css('img').present? ? @doc.css('img').first.attr('src'): nil
         @al_jazeera_published = @doc.css('span.screen-reader-text').text
         @al_jazeera_articles << NewsArticle.create!(source: 'Al Jazeera', title: @al_jazeera_title, content: @al_jazeera_content, image: @al_jazeera_image, link: @al_jazeera_link, published: @al_jazeera_published)
       end
