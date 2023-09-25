@@ -1,6 +1,10 @@
- <%= render 'landing' %>
 <div class="container">
-  <h1>News Scraper</h1>
+  <div class="parent">
+    <div class="title">
+      <h1>News Scraper</h1>
+    </div>
+  </div>
+  <%= render 'search' %>
   <div>
     <%= form_tag news_articles_path, method: :get, id: 'filter-form' do %>
       <label>
@@ -20,8 +24,11 @@
     <% end %>
   </div>
   <% if params[:search].present? %>
-    <h2>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h2>
-    <h3>Search Articles Total: <%= @articles.length  %></h3>
+    <div class="parent">
+      <div class="results">
+        <h3>Showing <%= @articles.length  %> results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
+      </div>
+    </div>
     <div class="d-flex">
       <div>
         <ol>
