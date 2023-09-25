@@ -6,6 +6,7 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       @articles += scrape_bbc
+      @articles += scrape_politico
       # @articles += scrape_cnn
       # @articles += scrape_reuters
       @articles += scrape_nyt
@@ -39,6 +40,25 @@ class NewsArticlesController < ApplicationController
       end
     end
     @bbc_articles
+  end
+
+  def scrape_politico
+    if params[:search].present?
+      @politico_articles = []
+      @url = "https://www.politico.com/search?q=#{params[:search][:query].split.join('+')}"
+      @html_file = URI.open(@url).read
+      @html_doc = Nokogiri::HTML.parse(@html_file)
+      @html_doc.search('.story-frag.format-ml').each do |element|
+        @doc = Nokogiri::HTML(element.inner_html)
+        @politico_title = @doc.css('h3').first.text
+        @politico_content = @doc.css('.tease').present? ? @doc.css('.tease').first.text : nil
+        @politico_link = @doc.css('a').first.attr('href')
+        @politico_image = @doc.css('img').present? ? @doc.css('img').first.values[0] : nil
+        @politico_published = @doc.css('time').text
+        @politico_articles << NewsArticle.create!(source: 'Politico', title: @politico_title, content: @politico_content, image: @politico_image, link: @politico_link, published: @politico_published)
+      end
+    end
+    @politico_articles
   end
 
   # def scrape_cnn
