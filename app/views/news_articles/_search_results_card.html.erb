@@ -1,4 +1,4 @@
-<div class="card-product mt-3">
+<div class="card-product mt-3 <%= article.source.downcase.split.join('_') %>">
   <img src="<%=article.image if article.image.present?%>" />
   <div class="card-product-infos">
     <h2><%= article.source %></h2>

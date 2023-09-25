@@ -7,11 +7,11 @@ class NewsArticlesController < ApplicationController
       NewsArticle.destroy_all
       @articles += scrape_bbc
       @articles += scrape_politico
+      @articles += scrape_al_jazeera
+      @articles += scrape_nyt
       # @articles += scrape_cnn
       # @articles += scrape_reuters
-      @articles += scrape_nyt
       # @articles += scrape_bloomberg
-      @articles += scrape_al_jazeera
       # @articles += scrape_japan_times
     end
     params[:source].present? ? @articles.filter : @articles
