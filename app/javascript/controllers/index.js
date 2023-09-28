@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
+
+import ToggleController from "./toggle_controller"
+application.register("toggle", ToggleController)

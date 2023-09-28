@@ -1,42 +1,29 @@
-<div class="container">
-  <div class="parent">
-    <div class="title">
-      <h1>News Scraper</h1>
+<div  class="container">
+  <div data-controller="toggle">
+    <div class="parent">
+      <div class="title">
+        <h1>News Scraper</h1>
+      </div>
     </div>
-  </div>
-  <%= render 'search' %>
-  <div>
-    <%= form_tag news_articles_path, method: :get, id: 'filter-form' do %>
-      <label>
-        <%= check_box_tag 'source[]', 'BBC', params[:source]&.include?('BBC') %>
-        BBC
-      </label>
-      <label>
-        <%= check_box_tag 'source[]', 'NYT', params[:source]&.include?('NYT') %>
-        NYT
-      </label>
-      <label>
-        <%= check_box_tag 'source[]', 'Al Jazeera', params[:source]&.include?('Al Jazeera') %>
-        Al Jazeera
-      </label>
-      <!-- Add more checkboxes for other filter options as needed -->
-      <%= submit_tag 'Filter' %>
+    <%= render 'search' %>
+    <div class='d-flex'>
+      <%= render 'checkboxes' %>
+    </div>
+    <% if params[:search].present? %>
+      <div class="parent">
+        <div class="results">
+          <h3>Showing <%= @articles.length  %> results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div>
+          <ol>
+            <% @articles.each do |article| %>
+              <li><%= render 'search_results_card', article: article %></li>
+            <% end %>
+          </ol>
+        </div>
+      </div>
     <% end %>
   </div>
-  <% if params[:search].present? %>
-    <div class="parent">
-      <div class="results">
-        <h3>Showing <%= @articles.length  %> results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
-      </div>
-    </div>
-    <div class="d-flex">
-      <div>
-        <ol>
-          <% @articles.each do |article| %>
-            <li><%= render 'search_results_card', article: article %></li>
-          <% end %>
-        </ol>
-      </div>
-    </div>
-  <% end %>
 </div>
