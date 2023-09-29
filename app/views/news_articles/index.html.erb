@@ -17,13 +17,11 @@
       </div>
       <div class="d-flex">
         <div>
-          <ol>
-            <% @articles.each do |article| %>
-              <div data-toggle-target="togglable<%= article.source.downcase.split.join('_').capitalize%>">
-                <li><%= render 'search_results_card', article: article %></li>
-              </div>
-            <% end %>
-          </ol>
+          <% @articles.each do |article| %>
+            <div>
+              <%= render 'search_results_card', article: article %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
