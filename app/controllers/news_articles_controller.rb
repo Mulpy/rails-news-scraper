@@ -12,7 +12,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_cnn
       # @articles += scrape_reuters
       # @articles += scrape_bloomberg
-      # @articles += scrape_japan_times
+      @articles += scrape_japan_times
     end
     params[:source].present? ? @articles.filter : @articles
   end
@@ -64,18 +64,24 @@ class NewsArticlesController < ApplicationController
   # def scrape_cnn
   #   if params[:search].present?
   #     @cnn_articles = []
-  #     @url = "https://edition.cnn.com/search?q=#{params[:search][:query]}&from=0&size=10&page=1&sort=newest&types=all&section="
-  #     @html_file = URI.open(@url).read
-  #     @html_doc = Nokogiri::HTML.parse(@html_file)
-  #     @html_doc.search('.container__headline.container_list-images-with-description__headline').each do |element|
-  #       @doc = Nokogiri::HTML(element.inner_html)
-  #       @cnn_title = @doc.css('p.ssrcss-6arcww-PromoHeadline.exn3ah96 span').first.text
-  #       @cnn_content = @doc.xpath('//div/div/p[1]').first.text
-  #       @cnn_link = @doc.css('a').first.attr('href')
-  #       @cnn_image = @doc.css('.image__picture').first.text
-  #       @cnn_published = @doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
-  #       @cnn_articles << NewsArticle.create!(source: 'CNN')
-  #     end
+  #     # HTTParty Method ---------------------------------------
+  #     response = HTTParty.get("https://edition.cnn.com/search?q=#{params[:search][:query].split.join('+')}&from=0&size=10&page=1&sort=newest&types=all&section=")
+  #     # parsing the HTML document returned by the server
+  #     document = Nokogiri::HTML(response.body)
+
+  #     # Open-Uri Method ----------------------------------------
+  #     # @url = "https://edition.cnn.com/search?q=#{params[:search][:query].split.join('+')}&from=0&size=10&page=1&sort=newest&types=all&section="
+  #     # @html_file = URI.open(@url).read
+  #     # @html_doc = Nokogiri::HTML.parse(@html_file)
+  #     # @html_doc.search('.container__headline.container_list-images-with-description__headline').each do |element|
+  #     #   @doc = Nokogiri::HTML(element.inner_html)
+  #     #   @cnn_title = @doc.css('p.ssrcss-6arcww-PromoHeadline.exn3ah96 span').first.text
+  #     #   @cnn_content = @doc.xpath('//div/div/p[1]').first.text
+  #     #   @cnn_link = @doc.css('a').first.attr('href')
+  #     #   @cnn_image = @doc.css('.image__picture').first.text
+  #     #   @cnn_published = @doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
+  #     #   @cnn_articles << NewsArticle.create!(source: 'CNN')
+  #     # end
   #   end
   #   @cnn_articles
   # end
@@ -83,17 +89,17 @@ class NewsArticlesController < ApplicationController
   # def scrape_reuters
   #   if params[:search].present?
   #     @reuters_articles = []
-  #     @url = "https://www.reuters.com/site-search/?query=#{params[:search][:query]}"
+  #     @url = "https://www.reuters.com/site-search/?query=#{params[:search][:query].split.join('+')}"
   #     @html_file = URI.open(@url).read
   #     @html_doc = Nokogiri::HTML.parse(@html_file)
-  #     @html_doc.search('div.media-story-card__legal__3kqtT').each do |element|
+  #     @html_doc.search('li').each do |element|
   #       @doc = Nokogiri::HTML(element.inner_html)
   #       @reuters_title = @doc.css('p.ssrcss-6arcww-PromoHeadline.exn3ah96 span').first.text
   #       @reuters_content = @doc.xpath('//div/div/p[1]').first.text
   #       @reuters_link = @doc.css('a').first.attr('href')
   #       @reuters_image = @doc.css('img').first.attr('src')
   #       @reuters_published = @doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
-  #       @reuters_articles << NewsArticle.create!(source: 'REUTERS')
+  #       @reuters_articles << NewsArticle.create!(source: 'REUTERS', title: @reuters_title, content: @reuters_content, image: @reuters_image, link: @reuters_link, published: @reuters_published)
   #     end
   #   end
   #   @reuters_articles
@@ -157,22 +163,22 @@ class NewsArticlesController < ApplicationController
     @al_jazeera_articles
   end
 
-  # def scrape_japan_times
-  #   if params[:search].present?
-  #     @japan_times_articles = []
-  #     @url = "https://www.japantimes.co.jp/search?query=#{params[:search][:query]}"
-  #     @html_file = URI.open(@url).read
-  #     @html_doc = Nokogiri::HTML.parse(@html_file)
-  #     @html_doc.search('.article').each do |element|
-  #       @doc = Nokogiri::HTML(element.inner_html)
-  #       @japan_times_title = @doc.css('.article-title').first.text
-  #       @japan_times_content = @doc.css('.article-body').first.text
-  #       @japan_times_link = @doc.css('a').first.attr('href')
-  #       @japan_times_image = @doc.css('img').first.attr('src')
-  #       @japan_times_published = @doc.css('.publish-date').text
-  #       @japan_times_articles << NewsArticle.create!(source: 'Japan Times', title: @japan_times_title, content: @japan_times_content, image: @japan_times_image, link: @japan_times_link, published: @japan_times_published)
-  #     end
-  #   end
-  #   @japan_times_articles
-  # end
+  def scrape_japan_times
+    if params[:search].present?
+      @japan_times_articles = []
+      @url = "https://www.japantimes.co.jp/search?query=#{params[:search][:query].split.join('+')}"
+      @html_file = URI.open(@url).read
+      @html_doc = Nokogiri::HTML.parse(@html_file)
+      @html_doc.search('.article').each do |element|
+        @doc = Nokogiri::HTML(element.inner_html)
+        @japan_times_title = @doc.css('.article-title').first.text
+        @japan_times_content = @doc.css('.article-body').present? ? @doc.css('.article-body').first.text : nil
+        @japan_times_link = @doc.css('a').first.attr('href')
+        @japan_times_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
+        @japan_times_published = @doc.css('.publish-date').present? ? @doc.css('.publish-date').text : nil
+        @japan_times_articles << NewsArticle.create!(source: 'Japan Times', title: @japan_times_title, content: @japan_times_content, image: @japan_times_image, link: @japan_times_link, published: @japan_times_published)
+      end
+    end
+    @japan_times_articles
+  end
 end
