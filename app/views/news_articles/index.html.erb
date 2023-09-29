@@ -19,7 +19,9 @@
         <div>
           <ol>
             <% @articles.each do |article| %>
-              <li><%= render 'search_results_card', article: article %></li>
+              <div data-toggle-target="togglable<%= article.source.downcase.split.join('_')%>">
+                <li><%= render 'search_results_card', article: article %></li>
+              </div>
             <% end %>
           </ol>
         </div>
