@@ -9,7 +9,9 @@ export default class extends Controller {
   }
 
   bbc() {
-    console.log("BBC firing");
-    this.togglableBbcTarget.classList.toggle("d-none");
+    const divs = document.querySelectorAll('.bbc');
+    divs.forEach((div) => {
+      div.classList.toggle("d-none");
+    });
   }
 }
