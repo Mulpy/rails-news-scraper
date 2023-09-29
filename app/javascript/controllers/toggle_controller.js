@@ -35,4 +35,11 @@ export default class extends Controller {
       div.classList.toggle("d-none");
     });
   }
+
+  japan_times() {
+    const divs = document.querySelectorAll('.japan_times');
+    divs.forEach((div) => {
+      div.classList.toggle("d-none");
+    });
+  }
 }
