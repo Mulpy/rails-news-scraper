@@ -7,24 +7,17 @@ export default class extends Controller {
   static targets = ['pie']
 
   connect() {
-    console.log("Hello from pie controller.js");
+    // console.log("Hello from pie controller.js");
   }
 
-  fire(jsBbc, jsPolitico, jsAlJazeera, jsNyt, jsJapanTimes) {
-    console.log("fire");
-    const jsBbc = document.querySelector(".bbccount").value;
-    console.log(jsBbc);
-    console.log(jsPolitico);
-    console.log(jsAlJazeera);
-    console.log(jsNyt);
-    console.log(jsJapanTimes);
-
+  fire() {
+    // console.log("fire");
     const newsArticles = {
-      "BBC": 10,
-      "Politico": 20,
-      "Al Jazeera": 23,
-      "NYT": 14,
-      "Japan Times": 21
+      "BBC": parseInt(jsBbc),
+      "Politico": parseInt(jsPolitico),
+      "Al Jazeera": parseInt(jsAlJazeera),
+      "NYT": parseInt(jsNyt),
+      "Japan Times": parseInt(jsJapanTimes)
     };
 
     const labels = Object.keys(newsArticles);
@@ -39,7 +32,7 @@ export default class extends Controller {
       data: {
         labels: labels,
         datasets: [{
-          label: 'News Ratio',
+          label: 'Artciles',
           data: data,
           backgroundColor: [
             'rgb(255, 160, 122)',

@@ -13,7 +13,7 @@
         </div>
         <div class="parent">
           <div class="results">
-            <h3>Showing <%= @articles.length  %> results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
+            <h3>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
           </div>
         </div>
         <div class="d-flex">
@@ -27,22 +27,14 @@
           <div class="container p-5">
             <div>
               <h2>Sources Breakdown</h2>
+              <h3>Total Articles: <strong><%= @articles.length %></strong></h3>
               <ul>
-                <li>BBC: 
-                  <div class="bbccount"><%= @bbc_articles.count %></div>
-                   articles</li>
-                <li>Politico: 
-                  <div class="politicocount"><%= @politico_articles.count %></div>
-                   articles</li>
-                <li>Al Jazeera: 
-                  <div class="aljazeeracount"><%= @al_jazeera_articles.count %></div>
-                   articles</li>
-                <li>NYT: 
-                  <div class="nytcount"><%= @nyt_articles.count %></div>
-                   articles</li>
-                <li>Japan Times: 
-                  <div class="jtcount"><%= @japan_times_articles.count %></div>
-                   articles</li>
+                <li>BBC: <%= @bbc_articles.count %> articles</li>
+                <li>Politico: <%= @politico_articles.count %> articles</li>
+                <li>Al Jazeera: <%= @al_jazeera_articles.count %>
+                  articles</li>
+                <li>NYT: <%= @nyt_articles.count %> articles</li>
+                <li>Japan Times: <%= @japan_times_articles.count %> articles</li>
               </ul>
               <% @ruby_bbc = @bbc_articles.count %>
               <% @ruby_politico = @politico_articles.count %>
@@ -55,11 +47,6 @@
                 const jsAlJazeera = <%= @ruby_al_jazeera.to_json %>;
                 const jsNyt = <%= @ruby_nyt.to_json %>;
                 const jsJapanTimes = <%= @ruby_japan_times.to_json %>;
-                <%# console.log(js_bbc);
-                console.log(js_politico);
-                console.log(js_al_jazeera);
-                console.log(js_nyt);
-                console.log(js_japan_times); %>
               <% end %>
               <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Display News Ratio</button>
               <div class="chart" id="pie">
