@@ -32,7 +32,7 @@ export default class extends Controller {
       data: {
         labels: labels,
         datasets: [{
-          label: 'Artciles',
+          label: 'Articles',
           data: data,
           backgroundColor: [
             'rgb(255, 160, 122)',

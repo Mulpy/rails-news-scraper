@@ -26,8 +26,8 @@
           </div>
           <div class="container p-5">
             <div>
-              <h2>Sources Breakdown</h2>
-              <h3>Total Articles: <strong><%= @articles.length %></strong></h3>
+              <h2>News Statistics</h2>
+              <h4><%= @articles.length %> Articles</h4>
               <ul>
                 <li>BBC: <%= @bbc_articles.count %> articles</li>
                 <li>Politico: <%= @politico_articles.count %> articles</li>
@@ -49,10 +49,10 @@
                 const jsJapanTimes = <%= @ruby_japan_times.to_json %>;
               <% end %>
               <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Display News Ratio</button>
-              <div class="chart" id="pie">
-                <canvas data-pie-target='pie'>
-                  <!-- TODO: Display pie chart below -->
-                </canvas>
+              <div class="shadow p-3 mb-5 bg-white rounded mt-4">
+                <div class="chart" id="pie">
+                  <canvas data-pie-target='pie'></canvas>
+                </div>
               </div>
             </div>
           </div>
