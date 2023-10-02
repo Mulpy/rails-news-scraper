@@ -24,8 +24,8 @@
               </div>
             <% end %>
           </div>
-          <div class="container p-5">
-            <div>
+          <div class="container p-5" >
+            <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
               <h2>News Statistics</h2>
               <h4><%= @articles.length %> Articles</h4>
               <ul>
@@ -36,23 +36,10 @@
                 <li>NYT: <%= @nyt_articles.count %> articles</li>
                 <li>Japan Times: <%= @japan_times_articles.count %> articles</li>
               </ul>
-              <% @ruby_bbc = @bbc_articles.count %>
-              <% @ruby_politico = @politico_articles.count %>
-              <% @ruby_al_jazeera = @al_jazeera_articles.count %>
-              <% @ruby_nyt = @nyt_articles.count %>
-              <% @ruby_japan_times = @japan_times_articles.count %>
-              <%= javascript_tag do %>
-                const jsBbc = <%= @ruby_bbc.to_json %>;
-                const jsPolitico = <%= @ruby_politico.to_json %>;
-                const jsAlJazeera = <%= @ruby_al_jazeera.to_json %>;
-                const jsNyt = <%= @ruby_nyt.to_json %>;
-                const jsJapanTimes = <%= @ruby_japan_times.to_json %>;
-              <% end %>
+              <%= render 'js_converter' %>
               <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Display News Ratio</button>
-              <div class="shadow p-3 mb-5 bg-white rounded mt-4">
-                <div class="chart" id="pie">
-                  <canvas data-pie-target='pie'></canvas>
-                </div>
+              <div class="chart" id="pie">
+                <canvas data-pie-target='pie'></canvas>
               </div>
             </div>
           </div>

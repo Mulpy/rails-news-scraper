@@ -1,0 +1,12 @@
+<% @ruby_bbc = @bbc_articles.count %>
+<% @ruby_politico = @politico_articles.count %>
+<% @ruby_al_jazeera = @al_jazeera_articles.count %>
+<% @ruby_nyt = @nyt_articles.count %>
+<% @ruby_japan_times = @japan_times_articles.count %>
+<%= javascript_tag do %>
+  const jsBbc = <%= @ruby_bbc.to_json %>;
+  const jsPolitico = <%= @ruby_politico.to_json %>;
+  const jsAlJazeera = <%= @ruby_al_jazeera.to_json %>;
+  const jsNyt = <%= @ruby_nyt.to_json %>;
+  const jsJapanTimes = <%= @ruby_japan_times.to_json %>;
+<% end %>
