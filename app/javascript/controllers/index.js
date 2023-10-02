@@ -10,6 +10,9 @@ application.register("filter", FilterController)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
+import PieController from "./pie_controller"
+application.register("pie", PieController)
+
 import { Chart } from "chart.js";
 import * as Chartjs from "chart.js";
 
