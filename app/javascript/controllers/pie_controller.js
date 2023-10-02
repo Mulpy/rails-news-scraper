@@ -11,13 +11,19 @@ export default class extends Controller {
   }
 
   fire(jsBbc, jsPolitico, jsAlJazeera, jsNyt, jsJapanTimes) {
-    // console.log("fire");
+    console.log("fire");
+    console.log(jsBbc);
+    console.log(jsPolitico);
+    console.log(jsAlJazeera);
+    console.log(jsNyt);
+    console.log(jsJapanTimes);
+
     const newsArticles = {
-      "BBC": jsBbc,
-      "Politico": jsPolitico,
-      "Al Jazeera": jsAlJazeera,
-      "NYT": jsNyt,
-      "Japan Times": jsJapanTimes
+      "BBC": 10,
+      "Politico": 20,
+      "Al Jazeera": 23,
+      "NYT": 14,
+      "Japan Times": 21
     };
 
     const labels = Object.keys(newsArticles);
