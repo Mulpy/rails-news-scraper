@@ -10,12 +10,14 @@ export default class extends Controller {
     console.log("Hello from pie controller.js");
   }
 
-  fire(jsBbc, jsPolitico, jsAlJazeera) {
+  fire(jsBbc, jsPolitico, jsAlJazeera, jsNyt, jsJapanTimes) {
     // console.log("fire");
     const newsArticles = {
       "BBC": jsBbc,
       "Politico": jsPolitico,
-      "Al Jazeera": jsAlJazeera
+      "Al Jazeera": jsAlJazeera,
+      "NYT": jsNyt,
+      "Japan Times": jsJapanTimes
     };
 
     const labels = Object.keys(newsArticles);
@@ -35,7 +37,9 @@ export default class extends Controller {
           backgroundColor: [
             'rgb(255, 160, 122)',
             'rgb(211, 211, 211)',
-            'rgb(250, 250, 210)'
+            'rgb(250, 250, 210)',
+            'rgb(173, 216, 230)',
+            'rgb(32, 178, 170)'
           ],
           hoverOffset: 4
         }]
