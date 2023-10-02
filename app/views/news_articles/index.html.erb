@@ -27,6 +27,30 @@
           <div class="container p-5">
             <div>
               <h2>News Ratio</h2>
+              <ul>
+                <li>BBC: <%= @bbc_articles.count %></li>
+                <li>Politico: <%= @politico_articles.count %></li>
+                <li>Al Jazeera: <%= @al_jazeera_articles.count %></li>
+                <li>NYT: <%= @nyt_articles.count %></li>
+                <li>Japan Times: <%= @japan_times_articles.count %></li>
+              </ul>
+              <% @ruby_bbc = @bbc_articles.count %>
+              <% @ruby_politico = @politico_articles.count %>
+              <% @ruby_al_jazeera = @al_jazeera_articles.count %>
+              <% @ruby_nyt = @nyt_articles.count %>
+              <% @ruby_japan_times = @japan_times_articles.count %>
+              <%= javascript_tag do %>
+                const jsBbc = <%= @ruby_bbc.to_json %>;
+                const jsPolitico = <%= @ruby_politico.to_json %>;
+                const jsAlJazeera = <%= @ruby_al_jazeera.to_json %>;
+                const jsNyt = <%= @ruby_nyt.to_json %>;
+                const jsJapanTimes = <%= @ruby_japan_times.to_json %>;
+                <%# console.log(js_bbc);
+                console.log(js_politico);
+                console.log(js_al_jazeera);
+                console.log(js_nyt);
+                console.log(js_japan_times); %>
+              <% end %>
               <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Display News Ratio</button>
               <div class="chart" id="pie">
                 <canvas data-pie-target='pie'>

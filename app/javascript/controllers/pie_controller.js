@@ -10,12 +10,12 @@ export default class extends Controller {
     console.log("Hello from pie controller.js");
   }
 
-  fire() {
-    console.log("fire");
+  fire(jsBbc, jsPolitico, jsAlJazeera) {
+    // console.log("fire");
     const newsArticles = {
-      "BBC": 10,
-      "Politico": 20,
-      "Al Jazeera": 10
+      "BBC": jsBbc,
+      "Politico": jsPolitico,
+      "Al Jazeera": jsAlJazeera
     };
 
     const labels = Object.keys(newsArticles);
@@ -24,7 +24,7 @@ export default class extends Controller {
   }
 
   buildPie(labels, data) {
-    console.log("build pie");
+    // console.log("build pie");
     this.pieTarget.innertext = new Chart(this.pieTarget, {
       type: 'pie',
       data: {
@@ -33,9 +33,9 @@ export default class extends Controller {
           label: 'News Ratio',
           data: data,
           backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
+            'rgb(255, 160, 122)',
+            'rgb(211, 211, 211)',
+            'rgb(250, 250, 210)'
           ],
           hoverOffset: 4
         }]
