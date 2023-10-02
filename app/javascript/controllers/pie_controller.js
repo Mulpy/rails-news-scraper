@@ -12,6 +12,7 @@ export default class extends Controller {
 
   fire(jsBbc, jsPolitico, jsAlJazeera, jsNyt, jsJapanTimes) {
     console.log("fire");
+    const jsBbc = document.querySelector(".bbccount").value;
     console.log(jsBbc);
     console.log(jsPolitico);
     console.log(jsAlJazeera);
