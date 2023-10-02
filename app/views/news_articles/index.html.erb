@@ -6,10 +6,10 @@
       </div>
     </div>
     <%= render 'search' %>
-    <div class='d-flex'>
-      <%= render 'checkboxes' %>
-    </div>
     <% if params[:search].present? %>
+      <div class='d-flex'>
+        <%= render 'checkboxes' %>
+      </div>
       <div class="parent">
         <div class="results">
           <h3>Showing <%= @articles.length  %> results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
@@ -22,6 +22,17 @@
               <%= render 'search_results_card', article: article %>
             </div>
           <% end %>
+        </div>
+        <div data-controller="application" class="container p-5">
+          <div data-controller="pie">
+            <h2>News Ratio</h2>
+            <button data-action="onclick->pie#connect">Display News Ratio</button>
+            <div class="chart" id="pie">
+              <canvas data-pie-target='pie'>
+                <!-- TODO: Display pie chart below -->
+              </canvas>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
