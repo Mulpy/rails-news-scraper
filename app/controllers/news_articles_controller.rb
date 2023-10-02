@@ -9,10 +9,12 @@ class NewsArticlesController < ApplicationController
       @articles += scrape_politico
       @articles += scrape_al_jazeera
       @articles += scrape_nyt
+      @articles += scrape_japan_times
+
+      # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
       # @articles += scrape_reuters
       # @articles += scrape_bloomberg
-      @articles += scrape_japan_times
     end
     params[:source].present? ? @articles.filter : @articles
   end
