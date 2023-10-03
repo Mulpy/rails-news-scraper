@@ -1,6 +1,6 @@
 <div  class="container">
-  <div data-controller="toggle">
-    <div data-controller="pie">
+  <div class="toggle" data-controller="toggle">
+    <div class="pie" data-controller="pie">
       <div class="parent">
         <div class="title">
           <h1>News Scraper</h1>
@@ -54,18 +54,27 @@
         </div>
       <% else %>
         <%= render 'home' %>
-        <div id="carouselExampleCaptions" class="carousel slide mt-4" data-bs-ride="carousel">
-          <%= render 'carousel_indicators' %>
-          <div class="carousel-inner">
-            <% @articles.each do |article| %>
-              <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
-                <%= render 'headline', article: article %>
+        <div class="container p-5" >
+          <div class="shadow p-3 mb-3 bg-white rounded mt-1">
+            <div class="d-flex justify-content-center">
+              <div class="align-self-center">
+                <h2>Today's Top Headlines from Google</h2>
               </div>
-            <% end %>
-          </div>
-          <%= render 'carousel_buttons' %>
+            </div>
+            <div id="carouselExampleCaptions" class="carousel slide mt-4" data-bs-ride="carousel">
+              <%= render 'carousel_indicators' %>
+              <div class="carousel-inner">
+                <% @articles.each do |article| %>
+                  <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
+                    <%= render 'headline', article: article %>
+                  </div>
+                <% end %>
+              </div>
+              <%= render 'carousel_buttons' %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
