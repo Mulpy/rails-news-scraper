@@ -194,7 +194,6 @@ class NewsArticlesController < ApplicationController
       @google_link = "https://news.google.com#{@doc.css('.WwrzSb').first.attr('href')[1..]}"
       @google_image = @doc.css('.Quavad').present? ? @doc.css('.Quavad').first.attr('src') : nil
       @google_articles << NewsArticle.create!(source: 'Google', title: @google_title, image: @google_image, link: @google_link)
-      raise
     end
     @google_articles
   end
