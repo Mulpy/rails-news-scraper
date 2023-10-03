@@ -4,13 +4,35 @@
   </div>
 </div>
 <div class="d-flex justify-content-center">
-  <ul>
-    <li>BBC</li>
-    <li>Politico</li>
-    <li>Al Jazeera</li>
-    <li>NYT</li>
-    <li>Japan Times</li>
-  </ul>
+  <div class="d-flex">
+    <div class="row">
+      <div class="col">
+        <%= link_to "https://www.bbc.com/news", target: :_blank do %>
+          <%= image_tag "https://pluspng.com/img-png/bbc-news-png-bbcnews-12-u-png-400.png", alt: "BBC website" %>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to "https://www.politico.com", target: :_blank do %>
+          <%= image_tag "https://www.wola.org/wp-content/uploads/2015/08/politico-logo.jpg", alt: "Politico website" %>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to "https://www.aljazeera.com", target: :_blank do %>
+          <%= image_tag "https://i.pinimg.com/originals/94/87/c4/9487c4c4299346380f6c91b96df0143c.png", alt: "Al Jazeera website" %>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to "https://www.nytimes.com", target: :_blank do %>
+          <%= image_tag "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png", alt: "New York Times website" %>
+        <% end %>
+      </div>
+      <div class="col">
+        <%= link_to "https://www.japantimes.co.jp", target: :_blank do %>
+          <%= image_tag "https://pbs.twimg.com/profile_images/877093724714434560/RlloH0si.jpg", alt: "Japan Times website" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="d-flex justify-content-center">
   <div class="align-self-center">

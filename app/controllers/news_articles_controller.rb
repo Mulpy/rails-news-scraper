@@ -16,6 +16,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_reuters
       # @articles += scrape_bloomberg
     else
+      NewsArticle.destroy_all
       @articles += scrape_google
     end
     @articles
@@ -187,13 +188,13 @@ class NewsArticlesController < ApplicationController
     @url = "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen"
     @html_file = URI.open(@url).read
     @html_doc = Nokogiri::HTML.parse(@html_file)
-    @html_doc.search('.IBr9hb').each do |element|
+    @html_doc.search('.IBr9hb').first(10).each do |element|
       @doc = Nokogiri::HTML(element.inner_html)
       @google_title = @doc.css('.gPFEn').first.text
       @google_link = @doc.css('.WwrzSb').first.attr('href')
       @google_image = @doc.css('.Quavad').present? ? @doc.css('.Quavad').first.attr('src') : nil
       @google_articles << NewsArticle.create!(source: 'Google', title: @google_title, image: @google_image, link: @google_link)
     end
-    @google_articles.first(10)
+    @google_articles
   end
 end
