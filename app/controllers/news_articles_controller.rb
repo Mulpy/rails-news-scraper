@@ -15,12 +15,10 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_cnn
       # @articles += scrape_reuters
       # @articles += scrape_bloomberg
+    else
+      @articles += scrape_google
     end
-    params[:source].present? ? @articles.filter : @articles
-  end
-
-  def filter
-    @articles.select { |article| article.source == params[:source].join }
+    @articles
   end
 
   private
@@ -182,5 +180,21 @@ class NewsArticlesController < ApplicationController
       end
     end
     @japan_times_articles
+  end
+
+  def scrape_google
+    @google_articles = []
+    @url = "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen"
+    @html_file = URI.open(@url).read
+    @html_doc = Nokogiri::HTML.parse(@html_file)
+    @html_doc.search('.IBr9hb').each do |element|
+      @doc = Nokogiri::HTML(element.inner_html)
+      @google_title = @doc.css('.gPFEn').first.text
+      @google_link = @doc.css('.WwrzSb').first.attr('href')
+      @google_image = @doc.css('.Quavad').present? ? @doc.css('.Quavad').first.attr('src') : nil
+      @google_articles << NewsArticle.create!(source: 'Google', title: @google_title, image: @google_image, link: @google_link)
+    end
+    @google_articles
+    raise
   end
 end
