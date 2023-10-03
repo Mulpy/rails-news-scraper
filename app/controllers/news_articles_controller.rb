@@ -194,7 +194,6 @@ class NewsArticlesController < ApplicationController
       @google_image = @doc.css('.Quavad').present? ? @doc.css('.Quavad').first.attr('src') : nil
       @google_articles << NewsArticle.create!(source: 'Google', title: @google_title, image: @google_image, link: @google_link)
     end
-    @google_articles
-    raise
+    @google_articles.first(10)
   end
 end
