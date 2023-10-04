@@ -7,7 +7,7 @@ export default class extends Controller {
   static targets = ['pie']
 
   connect() {
-    console.log("Hello from pie controller.js");
+    // console.log("Hello from pie controller.js");
   }
 
   fire() {

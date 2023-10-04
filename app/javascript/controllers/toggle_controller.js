@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["togglableBbc", "togglablePolitico", "togglableAl_jazeera", "togglableNyt"];
 
   connect() {
-    console.log("Hello from toggle_controller.js")
+    // console.log("Hello from toggle_controller.js")
   }
 
   bbc() {
