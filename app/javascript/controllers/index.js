@@ -2,16 +2,32 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+// import { application } from "./application"
 
-import FilterController from "./filter_controller"
-application.register("filter", FilterController)
+// import FilterController from "./filter_controller"
+// application.register("filter", FilterController)
 
-import ToggleController from "./toggle_controller"
-application.register("toggle", ToggleController)
+// import ToggleController from "./toggle_controller"
+// application.register("toggle", ToggleController)
 
-import PieController from "./pie_controller"
-application.register("pie", PieController)
+// import PieController from "./pie_controller"
+// application.register("pie", PieController)
+
+// --------------------------------------------
+
+// Import and register all your controllers from the importmap under controllers/*
+
+import { application } from "controllers/application"
+
+// Eager load all controllers defined in the import map under controllers/**/*_controller
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
+
+// Lazy load controllers as they appear in the DOM (remember not to preload controllers in import map!)
+// import { lazyLoadControllersFrom } from "@hotwired/stimulus-loading"
+// lazyLoadControllersFrom("controllers", application)
+
+// ------------------------------------------------
 
 import { Chart } from "chart.js";
 import * as Chartjs from "chart.js";
