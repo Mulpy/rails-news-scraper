@@ -46,4 +46,8 @@ export default class extends Controller {
       }
     });
   }
+
+  destroyPie() {
+    this.pieTarget.innertext = "";
+  }
 }
