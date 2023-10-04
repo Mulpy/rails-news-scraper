@@ -53,16 +53,13 @@ rails s
 - [Heroku](https://heroku.com/) - Deployment
 - [PostgreSQL](https://www.postgresql.org/) - Database
 - [Bootstrap](https://getbootstrap.com/) — Styling
-- [Figma](https://www.figma.com) — Prototyping
+- [Nokogiri](https://nokogiri.org/) - Web Scraping
 
 ## Acknowledgements
 The Le Wagon Tokyo Teaching Staff
 
 ## Team Members
 - [Gary Topping](www.linkedin.com/in/gary-topping)
-- [Alvin (Ken) Yau]()
-- [James Lau]()
-- [Ritsuki Toshima]()
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
