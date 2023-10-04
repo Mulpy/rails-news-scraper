@@ -7,15 +7,16 @@ The hardest part of designing this app was definitely utilizing Nokogiri to scra
 
 I enjoyed using JavaScript to create some interactive elements with the web app such as filtering the search results and displaying results in a pie chart. I will continue to work on the styling of the website and to update with extra features that users find useful. 
 
-<img width="350" alt="Screenshot 2023-09-04 at 15 18 38" src="https://github.com/Ritsuki-Toshima/ikigai1298/assets/138346709/76d6ca97-0e51-46cc-b508-9b089648117b">
 <br>
 <img width="350" alt="news_scraper_home" src="https://github.com/Mulpy/rails-news-scraper/assets/134996929/3449a9f5-4c5a-4682-ad73-704744dc4a10">
-
-![news_scraper_search3](https://github.com/Mulpy/rails-news-scraper/assets/134996929/c56f2aa0-8011-4a3a-960e-6c69d14ce9d0)
-![news_scraper_search2](https://github.com/Mulpy/rails-news-scraper/assets/134996929/c398cb93-5a62-4d31-9394-8e423017a531)
-![news_scraper_search](https://github.com/Mulpy/rails-news-scraper/assets/134996929/4cc50034-f55c-4a35-ba7f-1df3136bbeab)
-![news_scraper_home2](https://github.com/Mulpy/rails-news-scraper/assets/134996929/9ca8e73e-e9c4-4284-9a74-ffc996b0c772)
-
+<br>
+<img width="350" alt="news_scraper_search3" src="https://github.com/Mulpy/rails-news-scraper/assets/134996929/c56f2aa0-8011-4a3a-960e-6c69d14ce9d0">
+<br>
+<img width="350" alt="news_scraper_search2" src="https://github.com/Mulpy/rails-news-scraper/assets/134996929/c398cb93-5a62-4d31-9394-8e423017a531">
+<br>
+<img width="350" alt="news_scraper_search" src="https://github.com/Mulpy/rails-news-scraper/assets/134996929/4cc50034-f55c-4a35-ba7f-1df3136bbeab">
+<br>
+<img width="350" alt="news_scraper_home2" src="https://github.com/Mulpy/rails-news-scraper/assets/134996929/9ca8e73e-e9c4-4284-9a74-ffc996b0c772">
 <br>
 App home: https://news-scraped-048c75f1e983.herokuapp.com
    
