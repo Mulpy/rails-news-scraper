@@ -11,11 +11,11 @@ export default class extends Controller {
   toggle() {
     document.body.classList.toggle('dark');
     console.log(this.darkTarget);
-    this.darkTarget.innerHTML = `<button data-action="click->dark#return">Toggle Light Mode</button>`;
+    this.darkTarget.innerHTML = `<button data-action="click->dark#return">Light Mode</button>`;
   }
 
   return() {
     document.body.classList.toggle('dark');
-    this.darkTarget.innerHTML = `<button data-action="click->dark#toggle">Toggle Dark Mode</button>`;
+    this.darkTarget.innerHTML = `<button data-action="click->dark#toggle">Dark Mode</button>`;
   }
 }
