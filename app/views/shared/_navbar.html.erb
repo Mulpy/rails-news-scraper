@@ -10,8 +10,8 @@
       <ul class="navbar-nav me-auto">
         <%# <% if user_signed_in? %>
         <nav>
-          <li data-controller="dark" class="nav-item active">
-            <button  data-action="click->dark#toggle" data-dark-target='dark'>Toggle Dark Mode</button>
+          <li data-controller="dark" data-dark-target='dark' class="nav-item active">
+            <button  data-action="click->dark#toggle" >Toggle Dark Mode</button>
           </li>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>

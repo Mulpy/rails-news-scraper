@@ -50,3 +50,19 @@
 .japan_times {
   background-color: lightseagreen;
 }
+
+// add media queries to resize the cards and card images
+
+
+
+@media (max-width: 768px) {
+  .card-product {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-product {
+    width: 100%;
+  }
+}
