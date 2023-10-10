@@ -2,7 +2,7 @@
   <img src="<%=article.image if article.image.present?%>" />
   <div class="card-product-infos">
     <h2><%= article.source %></h2>
-    <h2><a href="<%=article.link if article.link.present?%>" target="_blank"><%= article.title if article.title.present? %></a></h2>
-    <p><%= article.content[..60] if article.content.present? %>... <strong><%= article.published if article.published.present?%></strong></p>
-  </div>
+    <h2><%= article.title if article.title.present? %></a></h2>
+  <p><%= article.content[..40] if article.content.present? %>...Click to read more... <strong> <%= article.published if article.published.present?%> </strong></p>
+</div>
 </div>

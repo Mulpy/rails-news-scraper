@@ -23,6 +23,9 @@ export default class extends Controller {
     const labels = Object.keys(newsArticles);
     const data = Object.values(newsArticles);
     this.buildPie(labels, data);
+
+    const button = document.querySelector(".pie-button");
+    button.innerHTML = `<button type="button" class="btn btn-warning" data-action="click->pie#hide">Hide Pie Chart</button>`;
   }
 
   buildPie(labels, data) {
@@ -47,7 +50,10 @@ export default class extends Controller {
     });
   }
 
-  destroyPie() {
-    this.pieTarget.innertext = "";
+  hide() {
+    // destroy the chart
+    this.pieTarget.innertext.destroy();
+    const button = document.querySelector(".pie-button");
+    button.innerHTML = `<button type="button" class="btn btn-primary" data-action="click->pie#fire">Show Pie Chart</button>`;
   }
 }
