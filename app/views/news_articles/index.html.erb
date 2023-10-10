@@ -76,11 +76,10 @@
               <%= render 'carousel_indicators' %>
               <div class="carousel-inner">
                 <% @articles.each do |article| %>
-                  <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none;">
-                    <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
-                      <%= render 'headline', article: article %>
-                    </div>
-                  </a>
+                  <%# enclose the entire div as a link to the article website %>
+                  <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
+                    <%= render 'headline', article: article %>
+                  </div>
                 <% end %>
               </div>
               <%= render 'carousel_buttons' %>
