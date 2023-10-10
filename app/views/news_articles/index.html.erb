@@ -26,7 +26,7 @@
               <div class="container p-5">
                 <% @articles.each do |article| %>
                   <%# enclose the entire div as a link to the article website %>
-                  <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none;">
+                  <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
                     <div>
                       <%= render 'search_results_card', article: article %>
                     </div>
