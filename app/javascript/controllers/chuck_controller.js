@@ -17,7 +17,7 @@ export default class extends Controller {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'X-RapidAPI-Key': `${process.env.CHUCK_API_KEY}`,
+        'X-RapidAPI-Key': config.apiKey,
         'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
       }
     };
@@ -33,7 +33,7 @@ export default class extends Controller {
     }
   }
 
-  fire() {
+  async fire() {
     // console.log("fire");
     this.buttonTarget.innerHTML = `<button type="button" class="btn btn-warning" data-action="click->chuck#hide">Hide Chuck</button>`;
     setTimeout(() => {
@@ -46,7 +46,14 @@ export default class extends Controller {
       </div>
     `;
     }, 10);
-    const config = fetch('/config.json').then(this.generateChuck(config));
+    try {
+      const response = await fetch('/config.json');
+      const config = await response.json();
+      this.generateChuck(config);
+    } catch (error) {
+      console.error(error);
+      this.chuckfactTarget.innerHTML = `<h3>Chuck Norris is too busy to tell you a joke right now.</h3>`;
+    }
   }
 
   hide() {
