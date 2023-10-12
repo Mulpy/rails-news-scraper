@@ -1,0 +1,16 @@
+<div class="container p-4" >
+  <div class="shadow p-3 mb-1 bg-white rounded">
+    <div class="parent">
+      <div class="title">
+        <h1>Today is <%= Date.today.strftime('%A, %e %B %Y') %></h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="shadow p-3 mb-1 bg-white rounded">
+  <div class="parent">
+    <div class="results">
+      <p>On this day in <%= @year %>, <%= @fact %></p>
+    </div>
+  </div>
+</div>

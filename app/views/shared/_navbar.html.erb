@@ -3,9 +3,9 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <i class="fa-regular fa-newspaper fa-2xl"></i>
     <% end %>
-    <i class="fa-regular fa-calendar-days fa-2xl">
-      <%= Date.today.strftime('%e %B') %>
-    </i>
+    <%= link_to news_article_path(id: 1), class: "navbar-brand" do %>
+      <i class="fa-regular fa-calendar-days fa-2xl"></i>
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

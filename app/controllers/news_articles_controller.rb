@@ -1,3 +1,7 @@
+require 'uri'
+require 'net/http'
+require 'json'
+
 class NewsArticlesController < ApplicationController
   def index
     @articles = []
@@ -20,6 +24,21 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_google
     end
     @articles
+  end
+
+  def show
+    month = Date.today.month
+    day = Date.today.day
+    url = URI("https://numbersapi.p.rapidapi.com/#{month}/#{day}/date?fragment=true&json=true")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request['X-RapidAPI-Key'] = '5fea725f4bmshe33f04d576c1ee8p196fe9jsn401a27bab034'
+    request['X-RapidAPI-Host'] = 'numbersapi.p.rapidapi.com'
+    response = http.request(request)
+    hash = JSON.parse(response.read_body)
+    @fact = hash['text']
+    @year = hash['year']
   end
 
   private
