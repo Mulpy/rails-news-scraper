@@ -17,7 +17,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_bloomberg
     else
       NewsArticle.destroy_all
-      @articles += scrape_google
+      # @articles += scrape_google
     end
     @articles
   end
@@ -156,7 +156,7 @@ class NewsArticlesController < ApplicationController
         @al_jazeera_title = @doc.css('span').first.text
         @al_jazeera_content = @doc.css('p').present? ? @doc.css('p').first.text : nil
         @al_jazeera_link = @doc.css('a').first.attr('href')
-        @al_jazeera_image = @doc.css('img').present? ? @doc.css('img').first.attr('src'): nil
+        @al_jazeera_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
         @al_jazeera_published = @doc.css('span.screen-reader-text').text
         @al_jazeera_articles << NewsArticle.create!(source: 'Al Jazeera', title: @al_jazeera_title, content: @al_jazeera_content, image: @al_jazeera_image, link: @al_jazeera_link, published: @al_jazeera_published)
       end
