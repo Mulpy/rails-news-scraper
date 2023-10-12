@@ -149,6 +149,8 @@ GEM
     minitest (5.19.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
+    net-http (0.3.2)
+      uri
     net-imap (0.3.7)
       date
       net-protocol
@@ -284,6 +286,7 @@ DEPENDENCIES
   httparty
   importmap-rails
   jbuilder
+  net-http
   nokogiri
   open-uri
   pg (~> 1.1)
@@ -296,6 +299,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  uri
   web-console
   webdrivers
 
