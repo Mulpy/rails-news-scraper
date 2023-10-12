@@ -61,6 +61,7 @@ gem 'httparty' # For HTTP requests
 gem 'net-http' # For HTTP requests and API
 gem 'uri' # For parsing URIs and API requests
 gem 'json' # For parsing JSON
+gem 'dotenv', '~> 2.7', '>= 2.7.6' # For environment variables
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

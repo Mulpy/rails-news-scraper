@@ -282,6 +282,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dotenv (~> 2.7, >= 2.7.6)
   dotenv-rails
   font-awesome-sass (~> 6.1)
   httparty
