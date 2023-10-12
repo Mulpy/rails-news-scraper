@@ -8,18 +8,20 @@
   </div>
 </div>
 <div class="chuck" data-controller="chuck">
-  <div class="shadow p-3 mb-1 bg-white rounded">
-    <div class="parent">
-      <div class="results">
-        <p>On this day in <%= @year %>, <%= @fact %></p>
+  <div class="container p-4" >
+    <div class="shadow p-3 mb-1 bg-white rounded">
+      <div class="parent">
+        <div class="results">
+          <h3>On this day in <%= @year %>, <%= @fact %></h3>
+        </div>
       </div>
-    </div>
-    <div class="d-flex justify-content-center">
-      <div class="align-self-center chuck-button" data-chuck-target='button'>
-        <button type="button" class="btn btn-primary"  data-action="click->chuck#fire">Chuck!</button>
+      <div class="d-flex justify-content-center">
+        <div class="align-self-center chuck-button" data-chuck-target='button'>
+          <button type="button" class="btn btn-primary"  data-action="click->chuck#fire">Chuck!</button>
+        </div>
       </div>
-    </div>
-    <div id="chuck" data-chuck-target='chuck'>
+      <div id="chuck" data-chuck-target='chuck'>
+      </div>
     </div>
   </div>
 </div>
