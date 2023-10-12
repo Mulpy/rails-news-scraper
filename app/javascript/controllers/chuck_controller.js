@@ -1,8 +1,8 @@
 require('dotenv').config()
 import { Controller } from "@hotwired/stimulus"
 import { application } from "./application";
-// import dotenv from '../../../dotenv';
-// dotenv.config();
+import dotenv from '../../../dotenv';
+dotenv.config();
 console.log(process.env.CHUCK_API_KEY);
 
 // Connects to data-controller="chuck"
