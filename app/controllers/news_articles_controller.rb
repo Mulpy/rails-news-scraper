@@ -170,7 +170,7 @@ class NewsArticlesController < ApplicationController
       @url = "https://www.japantimes.co.jp/search?query=#{params[:search][:query].split.join('+')}"
       @html_file = URI.open(@url).read
       @html_doc = Nokogiri::HTML.parse(@html_file)
-      @html_doc.search('.article').each do |element|
+      @html_doc.search('.article').first(20).each do |element|
         @doc = Nokogiri::HTML(element.inner_html)
         @japan_times_title = @doc.css('.article-title').first.text
         @japan_times_content = @doc.css('.article-body').present? ? @doc.css('.article-body').first.text : nil

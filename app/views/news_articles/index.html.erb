@@ -22,42 +22,40 @@
             <div class="d-flex justify-content-center">
               <%= render 'checkboxes' %>
             </div>
-            <div class="d-flex">
-              <div class="container p-5">
-                <% @articles.each do |article| %>
-                  <%# enclose the entire div as a link to the article website %>
-                  <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
-                    <div>
-                      <%= render 'search_results_card', article: article %>
-                    </div>
-                  </a>
-                <% end %>
-              </div>
-              <div class="container p-5" >
-                <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
-                  <div class="d-flex justify-content-center">
-                    <div class="align-self-center">
-                      <h2>News Statistics</h2>
-                    </div>
+            <div class="container p-5">
+              <% @articles.each do |article| %>
+                <%# enclose the entire div as a link to the article website %>
+                <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
+                  <div>
+                    <%= render 'search_results_card', article: article %>
                   </div>
-                  <h4><%= @articles.length %> Articles:</h4>
-                  <ul>
-                    <li>BBC: <%= @bbc_articles.count %> articles</li>
-                    <li>Politico: <%= @politico_articles.count %> articles</li>
-                    <li>Al Jazeera: <%= @al_jazeera_articles.count %>
-                      articles</li>
-                    <li>NYT: <%= @nyt_articles.count %> articles</li>
-                    <li>Japan Times: <%= @japan_times_articles.count %> articles</li>
-                  </ul>
-                  <%= render 'js_converter' %>
-                  <div class="d-flex justify-content-center">
-                    <div class="align-self-center pie-button">
-                      <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
-                    </div>
+                </a>
+              <% end %>
+            </div>
+            <div class="container p-5" >
+              <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
+                <div class="d-flex justify-content-center">
+                  <div class="align-self-center">
+                    <h2>News Statistics</h2>
                   </div>
-                  <div class="chart" id="pie">
-                    <canvas data-pie-target='pie'></canvas>
+                </div>
+                <h4><%= @articles.length %> Articles:</h4>
+                <ul>
+                  <li>BBC: <%= @bbc_articles.count %> articles</li>
+                  <li>Politico: <%= @politico_articles.count %> articles</li>
+                  <li>Al Jazeera: <%= @al_jazeera_articles.count %>
+                    articles</li>
+                  <li>NYT: <%= @nyt_articles.count %> articles</li>
+                  <li>Japan Times: <%= @japan_times_articles.count %> articles</li>
+                </ul>
+                <%= render 'js_converter' %>
+                <div class="d-flex justify-content-center">
+                  <div class="align-self-center pie-button">
+                    <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
                   </div>
+                </div>
+                <div class="chart" id="pie">
+                  <canvas data-pie-target='pie'></canvas>
                 </div>
               </div>
             </div>
