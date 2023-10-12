@@ -1,9 +1,6 @@
-require('dotenv').config()
 import { Controller } from "@hotwired/stimulus"
 import { application } from "./application";
-import dotenv from '../../../dotenv';
-dotenv.config();
-console.log(process.env.CHUCK_API_KEY);
+
 
 // Connects to data-controller="chuck"
 export default class extends Controller {
@@ -13,7 +10,8 @@ export default class extends Controller {
     // console.log("Hello from chuck_controller.js")
   }
 
-  async generateChuck() {
+  async generateChuck(config) {
+    console.log('API key:', config.apiKey);
     const url = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random';
     const options = {
       method: 'GET',
@@ -47,8 +45,8 @@ export default class extends Controller {
         </div>
       </div>
     `;
-    }, 1000);
-    this.generateChuck();
+    }, 10);
+    const config = fetch('/config.json').then(this.generateChuck(config));
   }
 
   hide() {
