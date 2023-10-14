@@ -10,10 +10,10 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       @articles += scrape_bbc
-      # @articles += scrape_politico
-      # @articles += scrape_al_jazeera
-      # @articles += scrape_nyt
-      # @articles += scrape_japan_times
+      @articles += scrape_politico
+      @articles += scrape_al_jazeera
+      @articles += scrape_nyt
+      @articles += scrape_japan_times
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
@@ -57,7 +57,11 @@ class NewsArticlesController < ApplicationController
         bbc_link = doc.css('a').first.attr('href')
         bbc_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
         bbc_published = doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
-        bbc_articles << NewsArticle.create!(source: 'BBC', title: bbc_title, content: bbc_content, image: bbc_image, link: bbc_link, published: bbc_published)
+        begin
+          bbc_articles << NewsArticle.create!(source: 'BBC', title: bbc_title, content: bbc_content, image: bbc_image, link: bbc_link, published: bbc_published)
+        rescue ActiveRecord::RecordInvalid => e
+          puts "Error creating NewsArticle: #{e.message}"
+        end
       end
       @sorted_bbc_articles = sort_bbc(bbc_articles)
     end
@@ -82,17 +86,21 @@ class NewsArticlesController < ApplicationController
   def scrape_politico
     if params[:search].present?
       @politico_articles = []
-      @url = "https://www.politico.com/search?q=#{params[:search][:query].split.join('+')}"
-      @html_file = URI.open(@url).read
-      @html_doc = Nokogiri::HTML.parse(@html_file)
-      @html_doc.search('.story-frag.format-ml').each do |element|
-        @doc = Nokogiri::HTML(element.inner_html)
-        @politico_title = @doc.css('h3').first.text
-        @politico_content = @doc.css('.tease').present? ? @doc.css('.tease').first.text : nil
-        @politico_link = @doc.css('a').first.attr('href')
-        @politico_image = @doc.css('img').present? ? @doc.css('img').first.values[0] : nil
-        @politico_published = @doc.css('time').text
-        @politico_articles << NewsArticle.create!(source: 'Politico', title: @politico_title, content: @politico_content, image: @politico_image, link: @politico_link, published: @politico_published)
+      url = "https://www.politico.com/search?q=#{params[:search][:query].split.join('+')}"
+      html_file = URI.open(url).read
+      html_doc = Nokogiri::HTML.parse(html_file)
+      html_doc.search('.story-frag.format-ml').each do |element|
+        doc = Nokogiri::HTML(element.inner_html)
+        politico_title = doc.css('h3').first.text
+        politico_content = doc.css('.tease').present? ? doc.css('.tease').first.text : nil
+        politico_link = doc.css('a').first.attr('href')
+        politico_image = doc.css('img').present? ? doc.css('img').first.values[0] : nil
+        politico_published = doc.css('time').text
+        begin
+          @politico_articles << NewsArticle.create!(source: 'Politico', title: politico_title, content: politico_content, image: politico_image, link: politico_link, published: politico_published)
+        rescue ActiveRecord::RecordInvalid => e
+          puts "Error creating NewsArticle: #{e.message}"
+        end
       end
     end
     @politico_articles
@@ -145,17 +153,21 @@ class NewsArticlesController < ApplicationController
   def scrape_nyt
     if params[:search].present?
       @nyt_articles = []
-      @url = "https://www.nytimes.com/search?query=#{params[:search][:query].split.join('+')}"
-      @html_file = URI.open(@url).read
-      @html_doc = Nokogiri::HTML.parse(@html_file)
-      @html_doc.search('.css-1i8vfl5').each do |element|
-        @doc = Nokogiri::HTML(element.inner_html)
-        @nyt_title = @doc.css('h4.css-2fgx4k').first.text
-        @nyt_content = @doc.css('p.css-16nhkrn').present? ? @doc.css('p.css-16nhkrn').first.text : nil
-        @nyt_link = "https://www.nytimes.com#{@doc.css('a').first.attr('href')}"
-        @nyt_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
-        @nyt_published = @doc.css('span.css-bc0f0m').text
-        @nyt_articles << NewsArticle.create!(source: 'NYT', title: @nyt_title, content: @nyt_content, image: @nyt_image, link: @nyt_link, published: @nyt_published)
+      url = "https://www.nytimes.com/search?query=#{params[:search][:query].split.join('+')}"
+      html_file = URI.open(url).read
+      html_doc = Nokogiri::HTML.parse(html_file)
+      html_doc.search('.css-1i8vfl5').each do |element|
+        doc = Nokogiri::HTML(element.inner_html)
+        nyt_title = doc.css('h4.css-2fgx4k').first.text
+        nyt_content = doc.css('p.css-16nhkrn').present? ? doc.css('p.css-16nhkrn').first.text : nil
+        nyt_link = "https://www.nytimes.com#{doc.css('a').first.attr('href')}"
+        nyt_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
+        nyt_published = doc.css('span.css-bc0f0m').text
+        begin
+          @nyt_articles << NewsArticle.create!(source: 'NYT', title: nyt_title, content: nyt_content, image: nyt_image, link: nyt_link, published: nyt_published)
+        rescue ActiveRecord::RecordInvalid => e
+          puts "Error creating NewsArticle: #{e.message}"
+        end
       end
     end
     @nyt_articles
@@ -184,17 +196,21 @@ class NewsArticlesController < ApplicationController
   def scrape_al_jazeera
     if params[:search].present?
       @al_jazeera_articles = []
-      @url = "https://www.aljazeera.com/search/#{params[:search][:query].split.join('%20')}"
-      @html_file = URI.open(@url).read
-      @html_doc = Nokogiri::HTML.parse(@html_file)
-      @html_doc.search('article').each do |element|
-        @doc = Nokogiri::HTML(element.inner_html)
-        @al_jazeera_title = @doc.css('span').first.text
-        @al_jazeera_content = @doc.css('p').present? ? @doc.css('p').first.text : nil
-        @al_jazeera_link = @doc.css('a').first.attr('href')
-        @al_jazeera_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
-        @al_jazeera_published = @doc.css('span.screen-reader-text').text
-        @al_jazeera_articles << NewsArticle.create!(source: 'Al Jazeera', title: @al_jazeera_title, content: @al_jazeera_content, image: @al_jazeera_image, link: @al_jazeera_link, published: @al_jazeera_published)
+      url = "https://www.aljazeera.com/search/#{params[:search][:query].split.join('%20')}"
+      html_file = URI.open(url).read
+      html_doc = Nokogiri::HTML.parse(html_file)
+      html_doc.search('article').each do |element|
+        doc = Nokogiri::HTML(element.inner_html)
+        al_jazeera_title = doc.css('span').first.text
+        al_jazeera_content = doc.css('p').present? ? doc.css('p').first.text : nil
+        al_jazeera_link = doc.css('a').first.attr('href')
+        al_jazeera_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
+        al_jazeera_published = doc.css('span.screen-reader-text').text
+        begin
+          @al_jazeera_articles << NewsArticle.create!(source: 'Al Jazeera', title: al_jazeera_title, content: al_jazeera_content, image: al_jazeera_image, link: al_jazeera_link, published: al_jazeera_published)
+        rescue ActiveRecord::RecordInvalid => e
+          puts "Error creating NewsArticle: #{e.message}"
+        end
       end
     end
     @al_jazeera_articles
@@ -203,34 +219,42 @@ class NewsArticlesController < ApplicationController
   def scrape_japan_times
     if params[:search].present?
       @japan_times_articles = []
-      @url = "https://www.japantimes.co.jp/search?query=#{params[:search][:query].split.join('+')}"
-      @html_file = URI.open(@url).read
-      @html_doc = Nokogiri::HTML.parse(@html_file)
-      @html_doc.search('.article').first(20).each do |element|
-        @doc = Nokogiri::HTML(element.inner_html)
-        @japan_times_title = @doc.css('.article-title').first.text
-        @japan_times_content = @doc.css('.article-body').present? ? @doc.css('.article-body').first.text : nil
-        @japan_times_link = @doc.css('a').first.attr('href')
-        @japan_times_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
-        @japan_times_published = @doc.css('.publish-date').present? ? @doc.css('.publish-date').text : nil
-        @japan_times_articles << NewsArticle.create!(source: 'Japan Times', title: @japan_times_title, content: @japan_times_content, image: @japan_times_image, link: @japan_times_link, published: @japan_times_published)
+      url = "https://www.japantimes.co.jp/search?query=#{params[:search][:query].split.join('+')}"
+      html_file = URI.open(url).read
+      html_doc = Nokogiri::HTML.parse(html_file)
+      html_doc.search('.article').first(20).each do |element|
+        doc = Nokogiri::HTML(element.inner_html)
+        japan_times_title = doc.css('.article-title').first.text
+        japan_times_content = doc.css('.article-body').present? ? doc.css('.article-body').first.text : nil
+        japan_times_link = doc.css('a').first.attr('href')
+        japan_times_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
+        japan_times_published = doc.css('.publish-date').present? ? doc.css('.publish-date').text : nil
+        begin
+          @japan_times_articles << NewsArticle.create!(source: 'Japan Times', title: japan_times_title, content: japan_times_content, image: japan_times_image, link: japan_times_link, published: japan_times_published)
+        rescue ActiveRecord::RecordInvalid => e
+          puts "Error creating NewsArticle: #{e.message}"
+        end
       end
     end
     @japan_times_articles
   end
 
   def scrape_google
-    @google_articles = []
-    @url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen'
-    @html_file = URI.open(@url).read
-    @html_doc = Nokogiri::HTML.parse(@html_file)
-    @html_doc.search('.IBr9hb').first(10).each do |element|
-      @doc = Nokogiri::HTML(element.inner_html)
-      @google_title = @doc.css('.gPFEn').first.text
-      @google_link = "https://news.google.com#{@doc.css('.WwrzSb').first.attr('href')[1..]}"
-      @google_image = @doc.css('.Quavad').present? ? @doc.css('.Quavad').first.attr('src') : nil
-      @google_articles << NewsArticle.create!(source: 'Google', title: @google_title, image: @google_image, link: @google_link)
+    google_articles = []
+    url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen'
+    html_file = URI.open(url).read
+    html_doc = Nokogiri::HTML.parse(html_file)
+    html_doc.search('.IBr9hb').first(10).each do |element|
+      doc = Nokogiri::HTML(element.inner_html)
+      google_title = doc.css('.gPFEn').first.text
+      google_link = "https://news.google.com#{doc.css('.WwrzSb').first.attr('href')[1..]}"
+      google_image = doc.css('.Quavad').present? ? doc.css('.Quavad').first.attr('src') : nil
+      begin
+        google_articles << NewsArticle.create!(source: 'Google', title: google_title, image: google_image, link: google_link)
+      rescue ActiveRecord::RecordInvalid => e
+        puts "Error creating NewsArticle: #{e.message}"
+      end
     end
-    @google_articles
+    google_articles
   end
 end
