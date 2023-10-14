@@ -41,12 +41,12 @@
                 </div>
                 <h4><%= @articles.length %> Articles:</h4>
                 <ul>
-                  <li>BBC: <%= @bbc_articles.count %> articles</li>
-                  <li>Politico: <%= @politico_articles.count %> articles</li>
-                  <li>Al Jazeera: <%= @al_jazeera_articles.count %>
+                  <li>BBC: <%= @bbc_articles.count if @bbc_articles.present? %> articles</li>
+                  <li>Politico: <%= @politico_articles.count if @politico_articles.present?%> articles</li>
+                  <li>Al Jazeera: <%= @al_jazeera_articles.count if @al_jazeera_articles.present? %>
                     articles</li>
-                  <li>NYT: <%= @nyt_articles.count %> articles</li>
-                  <li>Japan Times: <%= @japan_times_articles.count %> articles</li>
+                  <li>NYT: <%= @nyt_articles.count if @nyt_articles.present? %> articles</li>
+                  <li>Japan Times: <%= @japan_times_articles.count if @japan_times_articles.present? %> articles</li>
                 </ul>
                 <%= render 'js_converter' %>
                 <div class="d-flex justify-content-center">

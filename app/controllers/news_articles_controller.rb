@@ -10,10 +10,10 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       @articles += scrape_bbc
-      @articles += scrape_politico
-      @articles += scrape_al_jazeera
-      @articles += scrape_nyt
-      @articles += scrape_japan_times
+      # @articles += scrape_politico
+      # @articles += scrape_al_jazeera
+      # @articles += scrape_nyt
+      # @articles += scrape_japan_times
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
@@ -27,7 +27,7 @@ class NewsArticlesController < ApplicationController
   end
 
   def show
-    @api = ENV['RAPID_API_KEY'].to_json
+    # @api = ENV['RAPID_API_KEY'].to_json
     month = Date.today.month
     day = Date.today.day
     url = URI("https://numbersapi.p.rapidapi.com/#{month}/#{day}/date?fragment=true&json=true")
@@ -47,6 +47,7 @@ class NewsArticlesController < ApplicationController
   def scrape_bbc
     if params[:search].present?
       @bbc_articles = []
+      @sorted_bbc_articles = []
       @url = "https://www.bbc.co.uk/search?q=#{params[:search][:query].split.join('+')}&seqId=95b35ae0-53a6-11ee-8615-ef58fd8d1f98&d=news_gnl"
       @html_file = URI.open(@url).read
       @html_doc = Nokogiri::HTML.parse(@html_file)
@@ -61,6 +62,18 @@ class NewsArticlesController < ApplicationController
       end
     end
     @bbc_articles
+    @bbc_hours = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', '%hour%')
+    @bbc_days = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', '%day%')
+    @bbc_this_year = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', "%#{Date.today.year.to_s}%")
+    @bbc_articles -= @bbc_hours
+    @bbc_articles -= @bbc_days
+    @bbc_articles -= @bbc_this_year
+    @bbc_articles
+    @sorted_bbc_articles << @bbc_hours
+    @sorted_bbc_articles << @bbc_days
+    @sorted_bbc_articles << @bbc_this_year
+    @sorted_bbc_articles << @bbc_articles
+    @sorted_bbc_articles.flatten
   end
 
   def scrape_politico

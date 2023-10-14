@@ -64,10 +64,22 @@ a.block-link {
   .card-product {
     width: 100%;
   }
+
+  .card-product img {
+    height: 100%;
+    width: 80px;
+    object-fit: cover;
+  }
 }
 
 @media (max-width: 576px) {
   .card-product {
     width: 100%;
+  }
+
+  .card-product img {
+    height: 100%;
+    width: 60px;
+    object-fit: cover;
   }
 }
