@@ -26,6 +26,12 @@ export default class extends Controller {
       const data = JSON.parse(result);
       const chuckFact = data['value'];
       this.chuckfactTarget.innerHTML = `<h3>${chuckFact}</h3>`;
+      // Add fade in effect
+      this.chuckfactTarget.style.opacity = 0;
+      setTimeout(() => {
+        this.chuckfactTarget.style.transition = "opacity 1s";
+        this.chuckfactTarget.style.opacity = 1;
+      }, 100);
     } catch (error) {
       console.error(error);
       this.chuckfactTarget.innerHTML = `<h3>Chuck Norris is too busy to tell you a joke right now.</h3>`;
@@ -45,6 +51,13 @@ export default class extends Controller {
         </div>
       </div>
     `;
+      // Add slide left effect
+      this.chuckTarget.style.transition = "transform 3s";
+      this.chuckTarget.style.transform = "translateX(100%)";
+      this.chuckTarget.style.display = "block";
+      setTimeout(() => {
+        this.chuckTarget.style.transform = "translateX(0)";
+      }, 100);
     }, 1000);
   }
 

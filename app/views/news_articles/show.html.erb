@@ -1,7 +1,3 @@
-<% @api = @ruby_api %>
-<%= javascript_tag do %>
-  const jsApi = <%= @api %>;
-<% end %>
 <div class="container p-4" >
   <div class="shadow p-3 mb-1 bg-white rounded">
     <div class="parent">
@@ -19,14 +15,14 @@
           <h3>On this day in <%= @year %>, <%= @fact %></h3>
         </div>
       </div>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-3">
         <div class="align-self-center chuck-button" data-chuck-target='button'>
           <button type="button" class="btn btn-primary"  data-action="click->chuck#fire">Chuck!</button>
         </div>
       </div>
-      <div id="chuckfact" data-chuck-target='chuckfact'>
+      <div class="mt-3" id="chuckfact" data-chuck-target='chuckfact'>
       </div>
-      <div id="chuck" data-chuck-target='chuck'>
+      <div class="mt-3" id="chuck" data-chuck-target='chuck'>
       </div>
     </div>
   </div>
