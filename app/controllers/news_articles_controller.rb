@@ -46,34 +46,37 @@ class NewsArticlesController < ApplicationController
 
   def scrape_bbc
     if params[:search].present?
-      @bbc_articles = []
-      @sorted_bbc_articles = []
-      @url = "https://www.bbc.co.uk/search?q=#{params[:search][:query].split.join('+')}&seqId=95b35ae0-53a6-11ee-8615-ef58fd8d1f98&d=news_gnl"
-      @html_file = URI.open(@url).read
-      @html_doc = Nokogiri::HTML.parse(@html_file)
-      @html_doc.search('.ssrcss-rn9nnc-PromoSwitchLayoutAtBreakpoints.et5qctl0').each do |element|
-        @doc = Nokogiri::HTML(element.inner_html)
-        @bbc_title = @doc.css('p.ssrcss-6arcww-PromoHeadline.exn3ah96 span').first.text
-        @bbc_content = @doc.xpath('//div/div/p[1]').present? ? @doc.xpath('//div/div/p[1]').first.text : nil
-        @bbc_link = @doc.css('a').first.attr('href')
-        @bbc_image = @doc.css('img').present? ? @doc.css('img').first.attr('src') : nil
-        @bbc_published = @doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
-        @bbc_articles << NewsArticle.create!(source: 'BBC', title: @bbc_title, content: @bbc_content, image: @bbc_image, link: @bbc_link, published: @bbc_published)
+      bbc_articles = []
+      url = "https://www.bbc.co.uk/search?q=#{params[:search][:query].split.join('+')}&seqId=95b35ae0-53a6-11ee-8615-ef58fd8d1f98&d=news_gnl"
+      html_file = URI.open(url).read
+      html_doc = Nokogiri::HTML.parse(html_file)
+      html_doc.search('.ssrcss-rn9nnc-PromoSwitchLayoutAtBreakpoints.et5qctl0').each do |element|
+        doc = Nokogiri::HTML(element.inner_html)
+        bbc_title = doc.css('p.ssrcss-6arcww-PromoHeadline.exn3ah96 span').first.text
+        bbc_content = doc.xpath('//div/div/p[1]').present? ? doc.xpath('//div/div/p[1]').first.text : nil
+        bbc_link = doc.css('a').first.attr('href')
+        bbc_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
+        bbc_published = doc.css('span.ssrcss-1if1g9v-MetadataText.e4wm5bw1').text
+        bbc_articles << NewsArticle.create!(source: 'BBC', title: bbc_title, content: bbc_content, image: bbc_image, link: bbc_link, published: bbc_published)
       end
+      @sorted_bbc_articles = sort_bbc(bbc_articles)
     end
-    @bbc_articles
-    @bbc_hours = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', '%hour%')
-    @bbc_days = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', '%day%')
-    @bbc_this_year = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', "%#{Date.today.year.to_s}%")
-    @bbc_articles -= @bbc_hours
-    @bbc_articles -= @bbc_days
-    @bbc_articles -= @bbc_this_year
-    @bbc_articles
-    @sorted_bbc_articles << @bbc_hours
-    @sorted_bbc_articles << @bbc_days
-    @sorted_bbc_articles << @bbc_this_year
-    @sorted_bbc_articles << @bbc_articles
-    @sorted_bbc_articles.flatten
+    @sorted_bbc_articles
+  end
+
+  def sort_bbc(bbc_articles)
+    new_bbc_articles = []
+    bbc_hours = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', '%hour%')
+    bbc_days = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', '%day%')
+    bbc_this_year = NewsArticle.where('source = ? AND published LIKE ?', 'BBC', "%#{Date.today.year}%")
+    bbc_articles -= bbc_hours
+    bbc_articles -= bbc_days
+    bbc_articles -= bbc_this_year
+    new_bbc_articles << bbc_hours
+    new_bbc_articles << bbc_days
+    new_bbc_articles << bbc_this_year
+    new_bbc_articles << bbc_articles
+    new_bbc_articles.flatten
   end
 
   def scrape_politico
