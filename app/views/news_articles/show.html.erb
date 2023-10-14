@@ -1,3 +1,7 @@
+<% @api = @ruby_api %>
+<%= javascript_tag do %>
+  const jsApi = <%= @api %>;
+<% end %>
 <div class="container p-4" >
   <div class="shadow p-3 mb-1 bg-white rounded">
     <div class="parent">

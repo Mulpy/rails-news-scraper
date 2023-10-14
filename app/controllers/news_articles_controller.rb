@@ -27,13 +27,14 @@ class NewsArticlesController < ApplicationController
   end
 
   def show
+    @api = ENV['RAPID_API_KEY'].to_json
     month = Date.today.month
     day = Date.today.day
     url = URI("https://numbersapi.p.rapidapi.com/#{month}/#{day}/date?fragment=true&json=true")
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(url)
-    request['X-RapidAPI-Key'] = '5fea725f4bmshe33f04d576c1ee8p196fe9jsn401a27bab034'
+    request['X-RapidAPI-Key'] = ENV['RAPID_API_KEY']
     request['X-RapidAPI-Host'] = 'numbersapi.p.rapidapi.com'
     response = http.request(request)
     hash = JSON.parse(response.read_body)
