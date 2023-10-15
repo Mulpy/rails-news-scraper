@@ -3,5 +3,5 @@ meta_title: "News Scraper - Search news from around the world"
 meta_description: "News Scraper compiles the latest news headlines from Google News.
 It uses Nokogiri to scrape the web and Rails to display the data.
 Users can search for news terms across the following websites: BBC, Politico, Al Jazeera, The New York Times and The Japan Times."
-meta_image: "irish_castle.jpg" # should exist in `app/assets/images/`
+meta_image: "favicon.png" # should exist in `app/assets/images/`
 twitter_account: "@Mulpy101"   # required for Twitter Cards
