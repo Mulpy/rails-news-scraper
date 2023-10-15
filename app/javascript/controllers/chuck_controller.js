@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import { application } from "./application";
 
 
 // Connects to data-controller="chuck"
@@ -7,7 +6,7 @@ export default class extends Controller {
   static targets = ["chuck", "button", "chuckfact"];
 
   connect() {
-    // console.log("Hello from chuck_controller.js")
+    console.log("Hello from chuck_controller.js")
   }
 
   async generateChuck() {
