@@ -2,52 +2,48 @@
   <div class="toggle" data-controller="toggle">
     <div class="pie" data-controller="pie">
       <% if params[:search].present? %>
-        <div class="container p-4" >
-          <div class="shadow p-3 mb-1 bg-white rounded">
-            <div class="parent">
-              <div class="results">
-                <h3>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
+        <div class="parent">
+          <div class="results">
+            <h3>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center" id="checkboxes">
+          <%= render 'checkboxes' %>
+        </div>
+        <div class="container p-1">
+          <% @articles.each do |article| %>
+            <%# enclose the entire div as a link to the article website %>
+            <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
+              <div>
+                <%= render 'search_results_card', article: article %>
+              </div>
+            </a>
+          <% end %>
+        </div>
+        <div class="container p-1" >
+          <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
+            <div class="d-flex justify-content-center">
+              <div class="align-self-center">
+                <h2>News Statistics</h2>
               </div>
             </div>
-            <div class="d-flex justify-content-center" id="checkboxes">
-              <%= render 'checkboxes' %>
-            </div>
-            <div class="container p-5">
-              <% @articles.each do |article| %>
-                <%# enclose the entire div as a link to the article website %>
-                <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
-                  <div>
-                    <%= render 'search_results_card', article: article %>
-                  </div>
-                </a>
-              <% end %>
-            </div>
-            <div class="container p-5" >
-              <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
-                <div class="d-flex justify-content-center">
-                  <div class="align-self-center">
-                    <h2>News Statistics</h2>
-                  </div>
-                </div>
-                <h4><%= @articles.length %> Articles:</h4>
-                <ul>
-                  <li>BBC: <%= @sorted_bbc_articles.count if @sorted_bbc_articles.present? %> articles</li>
-                  <li>Politico: <%= @politico_articles.count if @politico_articles.present?%> articles</li>
-                  <li>Al Jazeera: <%= @al_jazeera_articles.count if @al_jazeera_articles.present? %>
-                    articles</li>
-                  <li>NYT: <%= @nyt_articles.count if @nyt_articles.present? %> articles</li>
-                  <li>Japan Times: <%= @japan_times_articles.count if @japan_times_articles.present? %> articles</li>
-                </ul>
-                <%= render 'js_converter' %>
-                <div class="d-flex justify-content-center">
-                  <div class="align-self-center pie-button">
-                    <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
-                  </div>
-                </div>
-                <div class="chart" id="pie">
-                  <canvas data-pie-target='pie'></canvas>
-                </div>
+            <h4><%= @articles.length %> Articles:</h4>
+            <ul>
+              <li>BBC: <%= @sorted_bbc_articles.count if @sorted_bbc_articles.present? %> articles</li>
+              <li>Politico: <%= @politico_articles.count if @politico_articles.present?%> articles</li>
+              <li>Al Jazeera: <%= @al_jazeera_articles.count if @al_jazeera_articles.present? %>
+                articles</li>
+              <li>NYT: <%= @nyt_articles.count if @nyt_articles.present? %> articles</li>
+              <li>Japan Times: <%= @japan_times_articles.count if @japan_times_articles.present? %> articles</li>
+            </ul>
+            <%= render 'js_converter' %>
+            <div class="d-flex justify-content-center">
+              <div class="align-self-center pie-button">
+                <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
               </div>
+            </div>
+            <div class="chart" id="pie">
+              <canvas data-pie-target='pie'></canvas>
             </div>
           </div>
         </div>

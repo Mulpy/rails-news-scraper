@@ -25,7 +25,11 @@ export default class extends Controller {
       const result = await response.text();
       const data = JSON.parse(result);
       const chuckFact = data['value'];
-      this.chuckfactTarget.innerHTML = `<h3>${chuckFact}</h3>`;
+      this.chuckfactTarget.innerHTML = `
+        <div class="d-flex justify-content-center">
+          <i class="fa-solid fa-gun fa-2xl"></i>
+          <h3>${chuckFact}</h3>
+        </div>`;
       // Add fade in effect
       this.chuckfactTarget.style.opacity = 0;
       setTimeout(() => {
@@ -40,14 +44,13 @@ export default class extends Controller {
 
   async fire() {
     // console.log("fire");
-    this.buttonTarget.innerHTML = `<button type="button" class="btn btn-warning" data-action="click->chuck#hide">Hide Chuck</button>`;
+    this.buttonTarget.innerHTML = `<button type="button" class="btn btn-warning" data-action="click->chuck#hide"><i class="fa-solid fa-user-ninja fa-2xl"></i></button>`;
     this.generateChuck();
     setTimeout(() => {
       this.chuckTarget.innerHTML = `
       <div class="d-flex justify-content-center">
         <div class="align-self-center">
             <iframe src="https://giphy.com/embed/2dJ5Iait4QrW8" width="480" height="311" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-            <p><a href="https://giphy.com/gifs/chuck-ok-norris-2dJ5Iait4QrW8" target="_blank">(Thanks GIPHY)</a></p>
         </div>
       </div>
     `;
@@ -63,7 +66,7 @@ export default class extends Controller {
 
   hide() {
     // console.log("hide");
-    this.buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" data-action="click->chuck#fire">Chuck!</button>`;
+    this.buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" data-action="click->chuck#fire"><i class="fa-solid fa-hat-cowboy fa-2xl"></button>`;
     this.chuckTarget.innerHTML = ``;
     this.chuckfactTarget.innerHTML = ``;
   }
