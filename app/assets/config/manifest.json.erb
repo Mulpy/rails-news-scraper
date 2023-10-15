@@ -1,0 +1,17 @@
+{
+"background_color": "white",
+"description": "With News Scraper you can search for news articles from a variety of sources, and see the results in a single place. You can also see the most popular topics in the news, and see a pie chart of the sources of the articles. News website",
+"display": "fullscreen",
+"name": "News Scraper",
+"icons": [
+<% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+<% files.each_with_index do |file, index| %>
+  <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+  {
+  "src": "<%= image_path "icons/#{file}" %>",
+  "sizes": "<%= match && match[:size] %>",
+  "type": "image/png"
+  }<%= "," unless (files.size - 1) == index %>
+<% end %>
+]
+}
