@@ -4,8 +4,9 @@
   position: fixed;
   top: 0;
   width: 100%;
-  height: fit-content;
+  height: 56px;
   font-size: large;
+  z-index: 9999;
 }
 
 .navbar-lewagon .navbar-collapse {

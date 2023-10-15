@@ -1,76 +1,77 @@
-<div  class="container mt-5">
+<div  class="container mt-5" style="padding-top: 4px;>
   <div class="toggle" data-controller="toggle">
     <div class="pie" data-controller="pie">
       <% if params[:search].present? %>
-        <div class="parent">
-          <div class="results">
-            <h3>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
-          </div>
-        </div>
-        <div class="d-flex justify-content-center" id="checkboxes">
-          <%= render 'checkboxes' %>
-        </div>
-        <div class="container p-1">
-          <% @articles.each do |article| %>
-            <%# enclose the entire div as a link to the article website %>
-            <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
-              <div>
-                <%= render 'search_results_card', article: article %>
-              </div>
-            </a>
-          <% end %>
-        </div>
-        <div class="container p-1" >
-          <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
-            <div class="d-flex justify-content-center">
-              <div class="align-self-center">
-                <h2>News Statistics</h2>
-              </div>
-            </div>
-            <h4><%= @articles.length %> Articles:</h4>
-            <ul>
-              <li>BBC: <%= @sorted_bbc_articles.count if @sorted_bbc_articles.present? %> articles</li>
-              <li>Politico: <%= @politico_articles.count if @politico_articles.present?%> articles</li>
-              <li>Al Jazeera: <%= @al_jazeera_articles.count if @al_jazeera_articles.present? %>
-                articles</li>
-              <li>NYT: <%= @nyt_articles.count if @nyt_articles.present? %> articles</li>
-              <li>Japan Times: <%= @japan_times_articles.count if @japan_times_articles.present? %> articles</li>
-            </ul>
-            <%= render 'js_converter' %>
-            <div class="d-flex justify-content-center">
-              <div class="align-self-center pie-button">
-                <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
-              </div>
-            </div>
-            <div class="chart" id="pie">
-              <canvas data-pie-target='pie'></canvas>
+        <div class="container mt-1">
+          <div class="d-flex justify-content-center">
+            <div class="align-self-center" style="text-align: center; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%">
+              <h3>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
             </div>
           </div>
-        </div>
-      <% else %>
-        <%= render 'home' %>
-        <div class="container p-1" >
-          <div class="shadow p-3 mb-1 bg-white rounded">
-            <div class="d-flex justify-content-center">
-              <div class="align-self-center">
-                <h2>Today's Google Headlines</h2>
+          <div class="d-flex justify-content-center" id="checkboxes" style="background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%;">
+            <%= render 'checkboxes' %>
+          </div>
+          <div class="container p-1">
+            <% @articles.each do |article| %>
+              <%# enclose the entire div as a link to the article website %>
+              <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
+                <div>
+                  <%= render 'search_results_card', article: article %>
+                </div>
+              </a>
+            <% end %>
+          </div>
+          <div class="container p-1" >
+            <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
+              <div class="d-flex justify-content-center">
+                <div class="align-self-center">
+                  <h2>News Statistics</h2>
+                </div>
+              </div>
+              <h4><%= @articles.length %> Articles:</h4>
+              <ul>
+                <li>BBC: <%= @sorted_bbc_articles.count if @sorted_bbc_articles.present? %> articles</li>
+                <li>Politico: <%= @politico_articles.count if @politico_articles.present?%> articles</li>
+                <li>Al Jazeera: <%= @al_jazeera_articles.count if @al_jazeera_articles.present? %>
+                  articles</li>
+                <li>NYT: <%= @nyt_articles.count if @nyt_articles.present? %> articles</li>
+                <li>Japan Times: <%= @japan_times_articles.count if @japan_times_articles.present? %> articles</li>
+              </ul>
+              <%= render 'js_converter' %>
+              <div class="d-flex justify-content-center">
+                <div class="align-self-center pie-button">
+                  <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
+                </div>
+              </div>
+              <div class="chart" id="pie">
+                <canvas data-pie-target='pie'></canvas>
               </div>
             </div>
-            <div id="carouselExampleCaptions" class="carousel slide mt-4" data-bs-ride="carousel">
-              <%= render 'carousel_indicators' %>
-              <div class="carousel-inner">
-                <% @articles.each do |article| %>
-                  <%# enclose the entire div as a link to the article website %>
-                  <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
-                    <%= render 'headline', article: article %>
-                  </div>
-                <% end %>
+          </div>
+        <% else %>
+          <%= render 'home' %>
+          <div class="container p-1" >
+            <div class="shadow p-3 mb-1 bg-white rounded">
+              <div class="d-flex justify-content-center">
+                <div class="align-self-center">
+                  <h2>Today's Google Headlines</h2>
+                </div>
               </div>
-              <%= render 'carousel_buttons' %>
-            </div>
-          <% end %>
+              <div id="carouselExampleCaptions" class="carousel slide mt-4" data-bs-ride="carousel">
+                <%= render 'carousel_indicators' %>
+                <div class="carousel-inner">
+                  <% @articles.each do |article| %>
+                    <%# enclose the entire div as a link to the article website %>
+                    <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
+                      <%= render 'headline', article: article %>
+                    </div>
+                  <% end %>
+                </div>
+                <%= render 'carousel_buttons' %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
