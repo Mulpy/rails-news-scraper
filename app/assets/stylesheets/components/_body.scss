@@ -14,6 +14,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  font-size: 12px;
 }
 
 // .dark {
@@ -30,7 +31,13 @@ body {
   flex: 1 0 50%;
 }
 
-@media (max-width: 768px) {
+// Media queries----------------------------------------------
+
+@media (max-width: 992px) {
+  body {
+    font-size: 10px;
+  }
+
   .parent {
     flex-direction: column;
   }
@@ -42,10 +49,47 @@ body {
   .card {
     width: 100%;
   }
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 8px;
+  }
+
+  .parent {
+    flex-direction: column;
+  }
+
+  .item {
+    flex-basis: 100%;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  img {
+    height: 40px;
+    width: 40px;
+  }
 }
 
 @media (max-width: 576px) {
+  body {
+    font-size: 8px;
+  }
+
   .card {
     width: 100%;
+  }
+
+  img {
+    height: 30px;
+    width: 30px;
   }
 }

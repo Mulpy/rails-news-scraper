@@ -1,16 +1,6 @@
-<div  class="container">
+<div  class="container mt-5">
   <div class="toggle" data-controller="toggle">
     <div class="pie" data-controller="pie">
-      <div class="container p-4" >
-        <div class="shadow p-3 mb-1 bg-white rounded">
-          <div class="parent">
-            <div class="title">
-              <h1>News Scraper</h1>
-            </div>
-          </div>
-          <%= render 'search' %>
-        </div>
-      </div>
       <% if params[:search].present? %>
         <div class="container p-4" >
           <div class="shadow p-3 mb-1 bg-white rounded">
@@ -63,11 +53,11 @@
         </div>
       <% else %>
         <%= render 'home' %>
-        <div class="container p-4" >
+        <div class="container p-1" >
           <div class="shadow p-3 mb-1 bg-white rounded">
             <div class="d-flex justify-content-center">
               <div class="align-self-center">
-                <h2>Today's Top Headlines from Google</h2>
+                <h2>Today's Google Headlines</h2>
               </div>
             </div>
             <div id="carouselExampleCaptions" class="carousel slide mt-4" data-bs-ride="carousel">
