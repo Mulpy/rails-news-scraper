@@ -22,3 +22,17 @@ a.block-link {
   display: block;
   text-decoration: none;
 }
+
+// media queries
+
+@media (max-width: 768px) {
+  .card-category {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-category {
+    height: 200px;
+  }
+}

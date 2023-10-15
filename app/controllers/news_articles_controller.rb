@@ -9,11 +9,11 @@ class NewsArticlesController < ApplicationController
     # Scraping logic for each website
     if params[:search].present?
       NewsArticle.destroy_all
-      @articles += scrape_bbc
-      @articles += scrape_politico
-      @articles += scrape_al_jazeera
-      @articles += scrape_nyt
-      @articles += scrape_japan_times
+      # @articles += scrape_politico
+      # @articles += scrape_bbc
+      # @articles += scrape_al_jazeera
+      # @articles += scrape_nyt
+      # @articles += scrape_japan_times
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
@@ -21,7 +21,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_bloomberg
     else
       NewsArticle.destroy_all
-      # @articles += scrape_google
+      @articles += scrape_google
     end
     @articles
   end

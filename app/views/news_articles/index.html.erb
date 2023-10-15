@@ -41,7 +41,7 @@
                 </div>
                 <h4><%= @articles.length %> Articles:</h4>
                 <ul>
-                  <li>BBC: <%= @bbc_articles.count if @bbc_articles.present? %> articles</li>
+                  <li>BBC: <%= @sorted_bbc_articles.count if @sorted_bbc_articles.present? %> articles</li>
                   <li>Politico: <%= @politico_articles.count if @politico_articles.present?%> articles</li>
                   <li>Al Jazeera: <%= @al_jazeera_articles.count if @al_jazeera_articles.present? %>
                     articles</li>
