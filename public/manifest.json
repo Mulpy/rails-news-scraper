@@ -45,5 +45,5 @@
   "display": "standalone",
   "description": "A web app that lets users consolidate the latest news.",
   "short_name": "News Scraper",
-  "start_url": "https://news-scraped-048c75f1e983.herokuapp.com",
+  "start_url": "https://news-scraped-048c75f1e983.herokuapp.com"
 }
