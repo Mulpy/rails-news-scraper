@@ -35,7 +35,13 @@
       "src": "\/android-icon-192x192.png",
       "sizes": "192x192",
       "type": "image\/png",
-      "density": "4.0"
+      "density": "4.0",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "display": "standalone",
+  "description": "A web app that lets users consolidate the latest news.",
+  "short_name": "News Scraper"
 }
