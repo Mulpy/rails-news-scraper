@@ -26,8 +26,7 @@ export default class extends Controller {
       const chuckFact = data['value'];
       this.chuckfactTarget.innerHTML = `
         <div class="d-flex justify-content-center">
-          <i class="fa-solid fa-gun fa-2xl"></i>
-          <h3>${chuckFact}</h3>
+          <h3>It's Chuck!</h3>
         </div>`;
       // Add fade in effect
       this.chuckfactTarget.style.opacity = 0;
