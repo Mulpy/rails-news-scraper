@@ -22,7 +22,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_bloomberg
     else
       NewsArticle.destroy_all
-      # @articles += scrape_google
+      @articles += scrape_google
     end
     @articles
   end
