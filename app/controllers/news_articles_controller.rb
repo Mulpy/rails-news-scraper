@@ -9,11 +9,12 @@ class NewsArticlesController < ApplicationController
     # Scraping logic for each website
     if params[:search].present?
       NewsArticle.destroy_all
-      @articles += scrape_bbc
-      @articles += scrape_politico
-      @articles += scrape_al_jazeera
-      @articles += scrape_nyt
-      @articles += scrape_japan_times
+      # @articles += scrape_bbc
+      # @articles += scrape_politico
+      # @articles += scrape_al_jazeera
+      # @articles += scrape_nyt
+      # @articles += scrape_japan_times
+      @articles += scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
@@ -21,7 +22,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_bloomberg
     else
       NewsArticle.destroy_all
-      @articles += scrape_google
+      # @articles += scrape_google
     end
     @articles
   end
@@ -239,9 +240,35 @@ class NewsArticlesController < ApplicationController
     @japan_times_articles
   end
 
+  def scrape_ap
+    if params[:search].present?
+      @ap_articles = []
+      url = "https://apnews.com/search?q=#{params[:search][:query].split.join('+')}&s="
+      html_file = URI.open(url).read
+      html_doc = Nokogiri::HTML.parse(html_file)
+      html_doc.search('.PagePromo').each do |element|
+        doc = Nokogiri::HTML(element.inner_html)
+        ap_title = doc.css('.PagePromoContentIcons-text').first.text
+        ap_content = doc.css('.PagePromo-description').present? ? doc.css('.PagePromo-description').first.text : nil
+        ap_link = doc.css('a').first.attr('href')
+        ap_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
+        ap_published = doc.css('.PagePromo-date').present? ? doc.css('.PagePromo-date').text : nil
+        begin
+          @ap_articles << NewsArticle.create!(source: 'AP', title: ap_title, content: ap_content, image: ap_image, link: ap_link, published: ap_published)
+        rescue ActiveRecord::RecordInvalid => e
+          puts "Error creating NewsArticle: #{e.message}"
+        end
+      end
+    end
+    @ap_articles
+  end
+
   def scrape_google
     google_articles = []
-    url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen'
+    url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=e
+
+
+    -US&gl=US&ceid=US%3Aen'
     html_file = URI.open(url).read
     html_doc = Nokogiri::HTML.parse(html_file)
     html_doc.search('.IBr9hb').first(8).each do |element|
