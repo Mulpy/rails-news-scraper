@@ -17,7 +17,8 @@ export default class extends Controller {
       "Politico": parseInt(jsPolitico),
       "Al Jazeera": parseInt(jsAlJazeera),
       "NYT": parseInt(jsNyt),
-      "Japan Times": parseInt(jsJapanTimes)
+      "Japan Times": parseInt(jsJapanTimes),
+      "AP": parseInt(jsAp)
     };
 
     const labels = Object.keys(newsArticles);
@@ -42,7 +43,8 @@ export default class extends Controller {
             'rgb(211, 211, 211)',
             'rgb(250, 250, 210)',
             'rgb(173, 216, 230)',
-            'rgb(32, 178, 170)'
+            'rgb(32, 178, 170)',
+            'rgb(255, 182, 193)'
           ],
           hoverOffset: 4
         }]

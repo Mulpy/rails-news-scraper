@@ -42,4 +42,11 @@ export default class extends Controller {
       div.classList.toggle("d-none");
     });
   }
+
+  ap() {
+    const divs = document.querySelectorAll('.ap');
+    divs.forEach((div) => {
+      div.classList.toggle("d-none");
+    });
+  }
 }

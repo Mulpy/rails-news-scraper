@@ -9,11 +9,11 @@ class NewsArticlesController < ApplicationController
     # Scraping logic for each website
     if params[:search].present?
       NewsArticle.destroy_all
-      # @articles += scrape_bbc
-      # @articles += scrape_politico
-      # @articles += scrape_al_jazeera
-      # @articles += scrape_nyt
-      # @articles += scrape_japan_times
+      @articles += scrape_bbc
+      @articles += scrape_politico
+      @articles += scrape_al_jazeera
+      @articles += scrape_nyt
+      @articles += scrape_japan_times
       @articles += scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
@@ -252,7 +252,7 @@ class NewsArticlesController < ApplicationController
         ap_content = doc.css('.PagePromo-description').present? ? doc.css('.PagePromo-description').first.text : nil
         ap_link = doc.css('a').first.attr('href')
         ap_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
-        ap_published = doc.css('.PagePromo-date').present? ? doc.css('.PagePromo-date').text : nil
+        ap_published = doc.css('bsp-timestamp span').present? ? doc.css('bsp-timestamp span').text : nil
         begin
           @ap_articles << NewsArticle.create!(source: 'AP', title: ap_title, content: ap_content, image: ap_image, link: ap_link, published: ap_published)
         rescue ActiveRecord::RecordInvalid => e
