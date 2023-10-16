@@ -9,6 +9,16 @@
   z-index: 9999;
 }
 
+.search-form-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-form-control label {
+  margin-right: 10px;
+}
+
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
