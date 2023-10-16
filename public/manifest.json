@@ -30,7 +30,7 @@
       "sizes": "144x144",
       "type": "image\/png",
       "density": "3.0",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "\/android-icon-192x192.png",
