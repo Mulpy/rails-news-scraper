@@ -29,7 +29,8 @@
       "src": "\/android-icon-144x144.png",
       "sizes": "144x144",
       "type": "image\/png",
-      "density": "3.0"
+      "density": "3.0",
+      "purpose": "any"
     },
     {
       "src": "\/android-icon-192x192.png",
@@ -43,5 +44,6 @@
   "theme_color": "#FFFFFF",
   "display": "standalone",
   "description": "A web app that lets users consolidate the latest news.",
-  "short_name": "News Scraper"
+  "short_name": "News Scraper",
+  "start_url": "https://news-scraped-048c75f1e983.herokuapp.com",
 }
