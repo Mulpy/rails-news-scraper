@@ -1,8 +1,18 @@
-<div class="card-product mt-1 <%= article.source.downcase.split.join('_') %>" data-toggle-target="togglable<%= article.source.downcase.split.join('_').capitalize%>">
+<div class="card-product mt-1 <%= article.source.downcase.split.join('_') %>" data-toggle-target="toggleable<%= article.source.downcase.split.join('_').capitalize%>">
   <img src="<%=article.image if article.image.present?%>" />
   <div class="card-product-infos">
     <h2><strong><%= article.source %></strong></h2>
     <h2><%= article.title if article.title.present? %></a></h2>
   <p><%= article.content[..40] if article.content.present? %>...Click to read more... <strong> <%= article.published if article.published.present?%> </strong></p>
+  <div class="d-flex mt-3">
+    <i class="fa-solid fa-trash-can fa-2xl"></i>
+    <div class="checkbox">
+      <div class="form-check">
+        <input autocomplete="off" name="read" type="hidden" value="0">
+        <input class="form-check-input" id="read" name="read" type="checkbox" value="" checked data-action="change->read#read">
+        <label class="form-check-label" for="read">Read</label>
+      </div>
+    </div>
+  </div>
 </div>
 </div>

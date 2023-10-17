@@ -1,6 +1,6 @@
 .card-product {
   overflow: hidden;
-  height: 120px;
+  height: 180px;
   background: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -60,6 +60,10 @@ a.block-link {
   text-decoration: none;
 }
 
+.read {
+  opacity: 0.8;
+}
+
 // add media queries to resize the cards and card images
 
 
@@ -67,7 +71,7 @@ a.block-link {
 @media (max-width: 768px) {
   .card-product {
     width: 100%;
-    height: 180px;
+    height: 220px;
   }
 
   .card-product img {
@@ -80,7 +84,7 @@ a.block-link {
 @media (max-width: 576px) {
   .card-product {
     width: 100%;
-    height: 240px;
+    height: 260px;
   }
 
   .card-product img {

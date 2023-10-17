@@ -1,4 +1,4 @@
-<div  class="container mt-5" style="padding-top: 4px;>
+<div  class="container mt-5" style="padding-top: 4px;">
   <div class="toggle" data-controller="toggle">
     <div class="pie" data-controller="pie">
       <% if params[:search].present? %>
@@ -15,7 +15,7 @@
             <% @articles.each do |article| %>
               <%# enclose the entire div as a link to the article website %>
               <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
-                <div>
+                <div data-controller="read">
                   <%= render 'search_results_card', article: article %>
                 </div>
               </a>

@@ -33,7 +33,7 @@ export default class extends Controller {
       setTimeout(() => {
         this.chuckfactTarget.style.transition = "opacity 1s";
         this.chuckfactTarget.style.opacity = 1;
-      }, 100);
+      }, 500);
     } catch (error) {
       console.error(error);
       this.chuckfactTarget.innerHTML = `<h3>Chuck Norris is too busy to tell you a joke right now.</h3>`;
@@ -58,7 +58,7 @@ export default class extends Controller {
       this.chuckTarget.style.display = "block";
       setTimeout(() => {
         this.chuckTarget.style.transform = "translateX(0)";
-      }, 100);
+      }, 1000);
     }, 1000);
   }
 

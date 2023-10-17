@@ -43,6 +43,12 @@ class NewsArticlesController < ApplicationController
     @year = hash['year']
   end
 
+  def destroy
+    @article = NewsArticle.find(params[:id])
+    @article.destroy
+    redirect_to news_articles_path
+  end
+
   private
 
   def scrape_bbc

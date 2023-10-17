@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="toggle"
 export default class extends Controller {
-  static targets = ["togglableBbc", "togglablePolitico", "togglableAl_jazeera", "togglableNyt"];
+  static targets = ["read", "togglableBbc", "togglablePolitico", "togglableAl_jazeera", "togglableNyt", "togglableJapan_times", "togglableAp"];
 
   connect() {
     // console.log("Hello from toggle_controller.js")
@@ -48,5 +48,10 @@ export default class extends Controller {
     divs.forEach((div) => {
       div.classList.toggle("d-none");
     });
+  }
+
+  read() {
+    console.log(this.readTarget);
+    this.readTarget.classList.add("read");
   }
 }
