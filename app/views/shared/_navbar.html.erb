@@ -11,15 +11,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-        <%# if user_signed_in? %>
-        <%# <li class="nav-item active">
-          <%= link_to "Popular Topics", "#", class: "nav-link" %>
-        <%# </li> %>
-        <%# else %>
-        <!--li class="nav-item"-->
-        <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
-        <!--/li-->
-        <%# end %>
+        <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "Popular Topics", "#", class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
       <%= simple_form_for :search, url:  news_articles_index_path, method: :get do |f| %>
         <div class="search-form-control form-group">
