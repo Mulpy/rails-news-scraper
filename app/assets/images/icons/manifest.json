@@ -1,5 +1,5 @@
 {
-  "name": "News Scraper",
+  "name": "App",
   "icons": [
     {
       "src": "\/android-icon-36x36.png",
@@ -29,8 +29,7 @@
       "src": "\/android-icon-144x144.png",
       "sizes": "144x144",
       "type": "image\/png",
-      "density": "3.0",
-      "purpose": "any maskable"
+      "density": "3.0"
     },
     {
       "src": "\/android-icon-192x192.png",
@@ -39,11 +38,5 @@
       "density": "4.0",
       "purpose": "any maskable"
     }
-  ],
-  "background_color": "#FFFFFF",
-  "theme_color": "#FFFFFF",
-  "display": "standalone",
-  "description": "A web app that lets users consolidate the latest news.",
-  "short_name": "News Scraper",
-  "start_url": "https://news-scraped-048c75f1e983.herokuapp.com"
+  ]
 }
