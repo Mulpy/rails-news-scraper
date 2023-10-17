@@ -9,40 +9,39 @@ export default class extends Controller {
     // console.log("Hello from chuck_controller.js")
   }
 
-  async generateChuck() {
-    const url = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random';
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        'X-RapidAPI-Key': '5fea725f4bmshe33f04d576c1ee8p196fe9jsn401a27bab034',
-        'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
-      }
-    };
-    try {
-      const response = await fetch(url, options);
-      const result = await response.text();
-      const data = JSON.parse(result);
-      const chuckFact = data['value'];
-      this.chuckfactTarget.innerHTML = `
+  generateChuck() {
+    // const url = 'https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random';
+    // const options = {
+    //   method: 'GET',
+    //   headers: {
+    //     accept: 'application/json',
+    //     'X-RapidAPI-Key': '5fea725f4bmshe33f04d576c1ee8p196fe9jsn401a27bab034',
+    //     'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+    //   }
+    // };
+    // try {
+    //   const response = await fetch(url, options);
+    //   const result = await response.text();
+    //   const data = JSON.parse(result);
+    //   const chuckFact = data['value'];
+    this.chuckfactTarget.innerHTML = `
         <div class="d-flex justify-content-center">
           <h3>It's Chuck!</h3>
         </div>`;
-      // Add fade in effect
-      this.chuckfactTarget.style.opacity = 0;
-      setTimeout(() => {
-        this.chuckfactTarget.style.transition = "opacity 1s";
-        this.chuckfactTarget.style.opacity = 1;
-      }, 500);
-    } catch (error) {
-      console.error(error);
-      this.chuckfactTarget.innerHTML = `<h3>Chuck Norris is too busy to tell you a joke right now.</h3>`;
-    }
+    // Add fade in effect
+    this.chuckfactTarget.style.opacity = 0;
+    setTimeout(() => {
+      this.chuckfactTarget.style.transition = "opacity 1s";
+      this.chuckfactTarget.style.opacity = 1;
+    }, 500);
+    // } catch (error) {
+    //   console.error(error);
+    //   this.chuckfactTarget.innerHTML = `<h3>Chuck Norris is too busy to tell you a joke right now.</h3>`;
   }
 
-  async fire() {
+  fire() {
     // console.log("fire");
-    this.buttonTarget.innerHTML = `<button type="button" class="btn btn-warning" data-action="click->chuck#hide"><i class="fa-solid fa-user-ninja fa-2xl"></i></button>`;
+    this.buttonTarget.innerHTML = `<button type="button" id="hide-chuck" class="btn btn-warning" data-action="click->chuck#hide"><i class="fa-solid fa-user-ninja fa-2xl"></i></button>`;
     this.generateChuck();
     setTimeout(() => {
       this.chuckTarget.innerHTML = `
@@ -64,7 +63,7 @@ export default class extends Controller {
 
   hide() {
     // console.log("hide");
-    this.buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" data-action="click->chuck#fire"><i class="fa-solid fa-hat-cowboy fa-2xl"></button>`;
+    this.buttonTarget.innerHTML = `<button type="button" id="chuck" class="btn btn-primary" data-action="click->chuck#fire"><i class="fa-solid fa-hat-cowboy fa-2xl"></button>`;
     this.chuckTarget.innerHTML = ``;
     this.chuckfactTarget.innerHTML = ``;
   }
