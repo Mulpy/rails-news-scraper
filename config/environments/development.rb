@@ -68,5 +68,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Default_url_options appropriate for a development environment (change to host url for production)
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_url_options = 'https://news-scraped-048c75f1e983.herokuapp.com'
 end
