@@ -6,8 +6,8 @@ class NewsArticlesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[ index show]
 
   def index
-    params[:search].present? ? @articles = [] : @articles = NewsArticle.all
-    @headlines = []
+    @articles = []
+    # @headlines = []
     # Scraping logic for each website
     if params[:search].present?
       NewsArticle.destroy_all
@@ -23,7 +23,8 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_reuters
       # @articles += scrape_bloomberg
     else
-      @headlines += scrape_google
+      NewsArticle.destroy_all
+      @articles += scrape_google
     end
     @articles
   end
