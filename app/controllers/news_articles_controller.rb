@@ -12,11 +12,11 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       @articles += scrape_bbc
-      @articles += scrape_politico
-      @articles += scrape_al_jazeera
-      @articles += scrape_nyt
-      @articles += scrape_japan_times
-      @articles += scrape_ap
+      # @articles += scrape_politico
+      # @articles += scrape_al_jazeera
+      # @articles += scrape_nyt
+      # @articles += scrape_japan_times
+      # @articles += scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
@@ -24,7 +24,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_bloomberg
     else
       NewsArticle.destroy_all
-      @articles += scrape_google
+      # @articles += scrape_google
     end
     @articles
   end
@@ -48,7 +48,7 @@ class NewsArticlesController < ApplicationController
   def destroy
     @article = NewsArticle.find(params[:id])
     @article.destroy
-    redirect_to news_articles_path
+    redirect_to root_path
   end
 
   private
