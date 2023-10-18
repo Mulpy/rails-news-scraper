@@ -8,12 +8,12 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @article = NewsArticle.find(params[:news_article_id])
+    @article = NewsArticle.find(params[:article])
     @bookmark = Bookmark.new
   end
 
   def create
-    @article = NewsArticle.find(params[:news_article_id])
+    @article = NewsArticle.find(params[:article])
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.user = current_user
     @bookmark.url = @article.link
@@ -38,6 +38,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:url, :title, :content, :source, :image, :published)
+    params.permit(:url, :title, :content, :source, :image, :published)
   end
 end

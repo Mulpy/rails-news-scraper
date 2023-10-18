@@ -12,11 +12,11 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       @articles += scrape_bbc
-      # @articles += scrape_politico
-      # @articles += scrape_al_jazeera
-      # @articles += scrape_nyt
-      # @articles += scrape_japan_times
-      # @articles += scrape_ap
+      @articles += scrape_politico
+      @articles += scrape_al_jazeera
+      @articles += scrape_nyt
+      @articles += scrape_japan_times
+      @articles += scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
@@ -24,7 +24,7 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_bloomberg
     else
       NewsArticle.destroy_all
-      # @articles += scrape_google
+      @articles += scrape_google
     end
     @articles
   end
@@ -273,10 +273,7 @@ class NewsArticlesController < ApplicationController
 
   def scrape_google
     google_articles = []
-    url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=e
-
-
-    -US&gl=US&ceid=US%3Aen'
+    url = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZxYUdjU0FtVnVHZ0pWVXlnQVAB?hl=e-US&gl=US&ceid=US%3Aen'
     html_file = URI.open(url).read
     html_doc = Nokogiri::HTML.parse(html_file)
     html_doc.search('.IBr9hb').first(8).each do |element|
