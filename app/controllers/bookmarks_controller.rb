@@ -20,6 +20,7 @@ class BookmarksController < ApplicationController
     @articles = NewsArticle.all
     @article = NewsArticle.find(params[:article])
     @bookmark = Bookmark.new(bookmark_params)
+    authorize @bookmark
     @bookmark.user = current_user
     @bookmark.url = @article.link
     @bookmark.title = @article.title
@@ -35,9 +36,10 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
-    @bookmark.destroy
-    redirect_to bookmarks_path
+    bookmark = Bookmark.find(params[:id])
+    authorize bookmark
+    bookmark.destroy
+    redirect_to bookmarks_path, status: :see_other
   end
 
   private

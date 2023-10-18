@@ -76,7 +76,6 @@ class NewsArticlesController < ApplicationController
       @sorted_bbc_articles = sort_bbc(bbc_articles)
     end
     @sorted_bbc_articles
-    authorize @sorted_bbc_articles
   end
 
   def sort_bbc(bbc_articles)
