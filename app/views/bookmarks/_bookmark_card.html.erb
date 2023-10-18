@@ -1,0 +1,13 @@
+<div class="card-product mt-1 <%= bookmark.source.downcase.split.join('_') %>" data-toggle-target="toggleable<%= bookmark.source.downcase.split.join('_').capitalize%>">
+  <img src="<%=bookmark.image if bookmark.image.present?%>">
+  <div class="card-product-infos">
+    <h2><strong><%= bookmark.source %></strong></h2>
+    <h2><%= bookmark.title if bookmark.title.present? %></a></h2>
+  <p><%= bookmark.content[..40] if bookmark.content.present? %>...Click to read more... <strong> <%= bookmark.published if bookmark.published.present?%> </strong></p>
+  <div class="d-flex mt-3">
+    <%= link_to bookmark_path(bookmark), class: "btn btn-secondary", data: { turbo_method: :delete, turbo_confirm: "Delete #{bookmark.title}?" } do %>
+      <i class="fa-solid fa-trash-can"></i>
+    <% end %>%
+  </div>
+</div>
+</div>

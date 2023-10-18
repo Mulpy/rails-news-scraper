@@ -1,0 +1,25 @@
+<div  class="container mt-5" style="padding-top: 4px;">
+  <div class="d-flex justify-content-center">
+    <div class="align-self-center" style="text-align: center; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%">
+      <h1><%=current_user.username.capitalize.strip%>'s Bookmarks</h1>
+    </div>
+  </div>
+  <div class="container p-1">
+    <% if @bookmarks.present? %>
+      <% @bookmarks.each do |bookmark| %>
+        <%# enclose the entire div as a link to the bookmark website %>
+        <a href="<%= bookmark.url if bookmark.url.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
+          <div data-controller="read">
+            <%= render 'bookmark_card', bookmark: bookmark %>
+          </div>
+        </a>
+      <% end %>
+    <% else %>
+      <div class="d-flex justify-content-center">
+        <div class="align-self-center" style="text-align: center; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%">
+          <h2>You have no bookmarks yet!</h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
