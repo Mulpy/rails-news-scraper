@@ -64,6 +64,8 @@ gem 'json' # For parsing JSON
 gem 'dotenv', '~> 2.7', '>= 2.7.6' # For environment variables
 gem "serviceworker-rails" # For Service Workers
 gem "pundit" # for authorization
+gem "brakeman" # for security
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
