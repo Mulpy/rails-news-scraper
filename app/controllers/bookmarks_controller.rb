@@ -25,7 +25,7 @@ class BookmarksController < ApplicationController
     @bookmark.image = @article.image
     @bookmark.published = @article.published
     if @bookmark.save
-      redirect_to root_path(articles: @articles)
+      redirect_to bookmarks_path
     else
       render :new, status: :unprocessable_entity
     end
