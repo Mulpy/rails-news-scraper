@@ -8,11 +8,13 @@ class BookmarksController < ApplicationController
   end
 
   def new
+    @articles = NewsArticle.all
     @article = NewsArticle.find(params[:article])
     @bookmark = Bookmark.new
   end
 
   def create
+    @articles = NewsArticle.all
     @article = NewsArticle.find(params[:article])
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.user = current_user
@@ -23,7 +25,7 @@ class BookmarksController < ApplicationController
     @bookmark.image = @article.image
     @bookmark.published = @article.published
     if @bookmark.save
-      redirect_to bookmarks_path(@bookmark)
+      redirect_to root_path(articles: @articles)
     else
       render :new, status: :unprocessable_entity
     end

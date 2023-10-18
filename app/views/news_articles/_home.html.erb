@@ -41,5 +41,12 @@
         </div>
       </div>
     </div>
+    <% unless user_signed_in? %>
+      <div class="d-flex justify-content-center mt-3">
+        <div class="align-self-center">
+          <h3>Sign-in or Register to bookmark your favorite articles</h3>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -7,7 +7,7 @@ class NewsArticlesController < ApplicationController
 
   def index
     @articles = []
-
+    @headlines = []
     # Scraping logic for each website
     if params[:search].present?
       NewsArticle.destroy_all
@@ -23,8 +23,8 @@ class NewsArticlesController < ApplicationController
       # @articles += scrape_reuters
       # @articles += scrape_bloomberg
     else
-      NewsArticle.destroy_all
-      @articles += scrape_google
+      # NewsArticle.destroy_all
+      @headlines += scrape_google
     end
     @articles
   end
