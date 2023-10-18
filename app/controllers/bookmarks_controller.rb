@@ -1,16 +1,19 @@
 class BookmarksController < ApplicationController
   def index
     @bookmarks = Bookmark.where(user_id: current_user.id)
+    authorize @bookmarks
   end
 
   def show
     @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
   end
 
   def new
     @articles = NewsArticle.all
     @article = NewsArticle.find(params[:article])
     @bookmark = Bookmark.new
+    authorize @bookmark
   end
 
   def create
