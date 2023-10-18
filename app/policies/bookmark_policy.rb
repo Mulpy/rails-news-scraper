@@ -26,6 +26,6 @@ class BookmarkPolicy < ApplicationPolicy
 
   def destroy?
     # NOTE: Be explicit about which records you allow access to!
-    record.user == user
+    @bookmark.user_id == current_user.id
   end
 end

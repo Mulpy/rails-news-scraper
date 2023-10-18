@@ -1,7 +1,7 @@
 class BookmarksController < ApplicationController
   def index
+    @bookmarks = policy_scope(Bookmark).all
     @bookmarks = Bookmark.where(user_id: current_user.id)
-    authorize @bookmarks
   end
 
   def show
