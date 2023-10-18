@@ -11,7 +11,6 @@ class BookmarkPolicy < ApplicationPolicy
   end
 
   def show?
-    # NOTE: Be explicit about which records you allow access to!
     true
   end
 
@@ -20,12 +19,10 @@ class BookmarkPolicy < ApplicationPolicy
   end
 
   def create?
-    # NOTE: Be explicit about which records you allow access to!
     true
   end
 
   def destroy?
-    # NOTE: Be explicit about which records you allow access to!
     record.user == user
   end
 end

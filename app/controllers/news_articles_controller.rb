@@ -31,6 +31,7 @@ class NewsArticlesController < ApplicationController
   end
 
   def show
+    skip_policy_scope
     # @api = ENV['RAPID_API_KEY'].to_json
     month = Date.today.month
     day = Date.today.day
