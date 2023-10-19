@@ -1,20 +1,20 @@
-<div  class="container mt-5" style="padding-top: 4px;">
+<div  class="container mt-5 pt-2">
   <div class="toggle" data-controller="toggle">
     <div class="pie" data-controller="pie">
       <% if params[:search].present? %>
         <div class="container mt-1">
           <div class="d-flex justify-content-center">
-            <div class="align-self-center" style="text-align: center; background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%">
+            <div class="align-self-center text-center bg-white shadow-lg w-100">
               <h3>Showing results for "<%= params[:search][:query].split.map(&:upcase).join(' & ')%>"</h3>
             </div>
           </div>
-          <div class="d-flex justify-content-center" id="checkboxes" style="background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); width: 100%;">
+          <div class="d-flex justify-content-center bg-white shadow-lg w-100" id="checkboxes">
             <%= render 'checkboxes' %>
           </div>
           <div class="container p-1">
             <% @articles.each do |article| %>
               <%# enclose the entire div as a link to the article website %>
-              <a href="<%= article.link if article.link.present? %>" target="_blank" style="display: block; text-decoration: none; color: black !important;">
+              <a class="d-block text-decoration-none text-dark" href="<%= article.link if article.link.present? %>" target="_blank">
                 <div data-controller="read">
                   <%= render 'search_results_card', article: article %>
                 </div>

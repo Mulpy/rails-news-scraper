@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["checkbox", "mulpy", "bookmark"];
 
   connect() {
-    console.log("Hello from read_controller.js")
+    // console.log("Hello from read_controller.js")
   }
 
   read() {
