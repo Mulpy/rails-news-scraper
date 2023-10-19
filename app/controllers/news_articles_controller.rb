@@ -13,11 +13,11 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       @articles += scrape_bbc
-      @articles += scrape_politico
-      @articles += scrape_al_jazeera
-      @articles += scrape_nyt
-      @articles += scrape_japan_times
-      @articles += scrape_ap
+      # @articles += scrape_politico
+      # @articles += scrape_al_jazeera
+      # @articles += scrape_nyt
+      # @articles += scrape_japan_times
+      # @articles += scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
       # @articles += scrape_cnn
