@@ -4,7 +4,7 @@
 <% @ruby_nyt = @nyt_articles.count if @nyt_articles.present?%>
 <% @ruby_japan_times = @japan_times_articles.count if @japan_times_articles.present?%>
 <% @ruby_ap = @ap_articles.count if @ap_articles.present?%>
-<%= javascript_tag nonce: true do %>
+<%= javascript_tag nonce: content_security_policy_nonce do %>
   const jsBbc = <%= @ruby_bbc.to_json %>;
   const jsPolitico = <%= @ruby_politico.to_json %>;
   const jsAlJazeera = <%= @ruby_al_jazeera.to_json %>;
