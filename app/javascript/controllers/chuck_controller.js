@@ -15,7 +15,7 @@ export default class extends Controller {
     //   method: 'GET',
     //   headers: {
     //     accept: 'application/json',
-    //     'X-RapidAPI-Key': '5fea725f4bmshe33f04d576c1ee8p196fe9jsn401a27bab034',
+    //     'X-RapidAPI-Key': '>>>Insert Key here<<<',
     //     'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
     //   }
     // };
