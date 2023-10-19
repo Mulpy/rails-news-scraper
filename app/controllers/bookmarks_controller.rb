@@ -10,26 +10,26 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @articles = NewsArticle.all
-    @article = NewsArticle.find(params[:article])
+    @user_articles = UserNewsArticle.all
+    @user_article = UserNewsArticle.find(params[:article])
     @bookmark = Bookmark.new
     authorize @bookmark
   end
 
   def create
-    @articles = NewsArticle.all
-    @article = NewsArticle.find(params[:article])
+    @user_articles = UserNewsArticle.all
+    @user_article = UserNewsArticle.find(params[:article])
     @bookmark = Bookmark.new(bookmark_params)
     authorize @bookmark
     @bookmark.user = current_user
-    @bookmark.url = @article.link
-    @bookmark.title = @article.title
-    @bookmark.content = @article.content
-    @bookmark.source = @article.source
-    @bookmark.image = @article.image
-    @bookmark.published = @article.published
+    @bookmark.url = @user_article.link
+    @bookmark.title = @user_article.title
+    @bookmark.content = @user_article.content
+    @bookmark.source = @user_article.source
+    @bookmark.image = @user_article.image
+    @bookmark.published = @user_article.published
     if @bookmark.save
-      redirect_to bookmarks_path
+      redirect_to user_news_articles_path, status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -45,6 +45,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.permit(:url, :title, :content, :source, :image, :published)
+    params.permit(:url, :title, :content, :source, :image, :published, :user_id, :rating, :reader_comment)
   end
 end

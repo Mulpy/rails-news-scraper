@@ -1,0 +1,14 @@
+<% @ruby_bbc = @sorted_bbc_user_articles.count if @sorted_bbc_user_articles.present? %>
+<% @ruby_politico = @politico_user_articles.count if @politico_user_articles.present?%>
+<% @ruby_al_jazeera = @al_jazeera_user_articles.count if @al_jazeera_user_articles.present?%>
+<% @ruby_nyt = @nyt_user_articles.count if @nyt_user_articles.present?%>
+<% @ruby_japan_times = @japan_times_user_articles.count if @japan_times_user_articles.present?%>
+<% @ruby_ap = @ap_user_articles.count if @ap_user_articles.present?%>
+<%= javascript_tag nonce: content_security_policy_nonce do %>
+  const jsBbc = <%= @ruby_bbc.to_json %>;
+  const jsPolitico = <%= @ruby_politico.to_json %>;
+  const jsAlJazeera = <%= @ruby_al_jazeera.to_json %>;
+  const jsNyt = <%= @ruby_nyt.to_json %>;
+  const jsJapanTimes = <%= @ruby_japan_times.to_json %>;
+  const jsAp = <%= @ruby_ap.to_json %>;
+<% end %>

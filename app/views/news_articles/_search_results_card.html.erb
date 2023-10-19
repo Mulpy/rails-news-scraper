@@ -16,13 +16,6 @@
             <label class="form-check-label" for="read_<%= article.id %>">Read</label>
           </div>
         </div>
-        <div data-read-target="bookmark">
-          <% if user_signed_in? %>
-            <%= link_to bookmarks_create_path(article: article) do %>
-              <i class="fa-regular fa-bookmark" data-action="click->read#bookmark"></i>
-            <% end %>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>

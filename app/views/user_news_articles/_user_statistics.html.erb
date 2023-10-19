@@ -1,0 +1,27 @@
+<div class="container p-1" >
+  <div class="shadow p-3 mb-5 bg-white rounded mt-4" id="stats">
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <h2>News Statistics</h2>
+      </div>
+    </div>
+    <h4><%= @user_articles.length %> articles:</h4>
+    <ul>
+      <li>BBC: <%= @sorted_bbc_user_articles.count if @sorted_bbc_user_articles.present? %> articles</li>
+      <li>Politico: <%= @politico_user_articles.count if @politico_user_articles.present?%> articles</li>
+      <li>Al Jazeera: <%= @al_jazeera_user_articles.count if @al_jazeera_user_articles.present? %>
+        articles</li>
+      <li>NYT: <%= @nyt_user_articles.count if @nyt_user_articles.present? %> articles</li>
+      <li>Japan Times: <%= @japan_times_user_articles.count if @japan_times_user_articles.present? %> articles</li>
+    </ul>
+    <%= render 'js_converter' %>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center pie-button">
+        <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
+      </div>
+    </div>
+    <div class="chart" id="pie">
+      <canvas data-pie-target='pie'></canvas>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -15,6 +16,18 @@ class ApplicationController < ActionController::Base
   # end
 
   private
+
+  def after_sign_in_path_for(_resource)
+    user_news_articles_path
+  end
+
+  def after_sign_out_path_for(_resource)
+    root_path
+  end
+
+  def after_sign_up_path_for(_resource)
+    user_news_articles_path
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/

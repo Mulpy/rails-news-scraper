@@ -1,0 +1,58 @@
+<div class="container p-1" >
+  <div class="shadow p-3 mb-1 bg-white rounded">
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <h1>Welcome <%= current_user.username.strip %>!</h1>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <h2>You can search all these news sites with <em>one</em> query</h2>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="d-flex">
+        <div class="row">
+          <div class="col">
+            <%= link_to "https://www.bbc.com/news", target: :_blank do %>
+              <%= image_tag('bbc.jpg', alt: "BBC website") %>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to "https://www.politico.com", target: :_blank do %>
+              <%= image_tag('politico.jpg', alt: "Politico website") %>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to "https://www.aljazeera.com", target: :_blank do %>
+              <%= image_tag('al_jazeera.png', alt: "Al Jazeera website") %>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to "https://www.nytimes.com", target: :_blank do %>
+              <%= image_tag('nyt.png', alt: "New York Times website") %>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to "https://www.japantimes.co.jp", target: :_blank do %>
+              <%= image_tag('jt.png', alt: "Japan Times website")  %>
+            <% end %>
+          </div>
+          <div class="col">
+            <%= link_to "https://apnews.com", target: :_blank do %>
+              <%= image_tag('ap.png', alt: "Associated Press website") %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center">
+        <h3>You can also:</h3>
+        <ul>
+          <li>Bookmark your favorite articles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
