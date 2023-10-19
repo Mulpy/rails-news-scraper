@@ -1,6 +1,6 @@
 <div class="mulpy" data-controller="read" data-read-target="mulpy" data-read-id="<%= article.id %>">
   <div class="card-product mt-1 <%= article.source.downcase.split.join('_') %>" data-toggle-target="toggleable<%= article.source.downcase.split.join('_').capitalize%>">
-    <img src="<%=article.image if article.image.present?%>">
+    <img src="<%=article.image if article.image.present?%>" alt="<%= article.title if article.title.present? %>">
     <div class="card-product-infos">
       <h2><strong><%= article.source %></strong></h2>
       <h2><%= article.title if article.title.present? %></a></h2>

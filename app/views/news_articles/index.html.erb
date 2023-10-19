@@ -60,7 +60,7 @@
               <div class="container p-1">
                 <% @articles.each do |article| %>
                   <%# enclose the entire div as a link to the article website %>
-                  <a class="d-block text-decoration-none text-dark" href="<%= article.link if article.link.present? %>" target="_blank">
+                  <a class="d-block text-decoration-none text-dark" href="<%= article.link if article.link.present? %>" target="_blank" aria-label="Read more about <%= article.title if article.title.present? %>">
                     <div data-controller="read">
                       <%= render 'search_results_card', article: article %>
                     </div>
