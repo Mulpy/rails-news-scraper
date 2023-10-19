@@ -57,22 +57,19 @@
                   <h2>Today's Google Headlines</h2>
                 </div>
               </div>
-              <div id="carouselExampleCaptions" class="carousel slide mt-2" data-bs-ride="carousel">
-                <%= render 'carousel_indicators' %>
-                <div class="carousel-inner">
-                  <% @articles.each do |article| %>
-                    <%# enclose the entire div as a link to the article website %>
-                    <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
+              <div class="container p-1">
+                <% @articles.each do |article| %>
+                  <%# enclose the entire div as a link to the article website %>
+                  <a class="d-block text-decoration-none text-dark" href="<%= article.link if article.link.present? %>" target="_blank">
+                    <div data-controller="read">
                       <%= render 'search_results_card', article: article %>
                     </div>
-                  <% end %>
-                </div>
-                <%= render 'carousel_buttons' %>
+                  </a>
+                <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
