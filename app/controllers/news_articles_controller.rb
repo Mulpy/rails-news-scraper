@@ -7,25 +7,25 @@ class NewsArticlesController < ApplicationController
 
   def index
     @articles = policy_scope(NewsArticle).all
-    @articles = []
+    @articles = NewsArticle.all
     # @headlines = []
     # Scraping logic for each website
     if params[:search].present?
       NewsArticle.destroy_all
-      @articles += scrape_bbc
-      @articles += scrape_politico
-      @articles += scrape_al_jazeera
-      @articles += scrape_nyt
-      @articles += scrape_japan_times
-      @articles += scrape_ap
+      scrape_bbc
+      scrape_politico
+      scrape_al_jazeera
+      scrape_nyt
+      scrape_japan_times
+      scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
-      # @articles += scrape_cnn
-      # @articles += scrape_reuters
-      # @articles += scrape_bloomberg
+      # scrape_cnn
+      # scrape_reuters
+      # scrape_bloomberg
     else
       NewsArticle.destroy_all
-      @articles += scrape_google
+      scrape_google
     end
     @articles
   end

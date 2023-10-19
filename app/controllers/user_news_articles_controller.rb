@@ -6,14 +6,13 @@ class UserNewsArticlesController < ApplicationController
     # @headlines = []
     # Scraping logic for each website
     if params[:search].present?
-      UserNewsArticle.where(user_id: current_user.id).destroy_all
-      @user_articles = []
-      @user_articles += scrape_bbc
-      @user_articles += scrape_politico
-      @user_articles += scrape_al_jazeera
-      @user_articles += scrape_nyt
-      @user_articles += scrape_japan_times
-      @user_articles += scrape_ap
+      @user_articles.destroy_all
+      scrape_bbc
+      scrape_politico
+      scrape_al_jazeera
+      scrape_nyt
+      scrape_japan_times
+      scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
       # @user_articles += scrape_cnn
