@@ -10,15 +10,15 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @user_articles = UserNewsArticle.all
-    @user_article = UserNewsArticle.find(params[:article])
+    @user_articles = UserNewsArticle.where(user_id: current_user.id)
+    @user_article = UserNewsArticle.find(params[:user_article])
     @bookmark = Bookmark.new
     authorize @bookmark
   end
 
   def create
-    @user_articles = UserNewsArticle.all
-    @user_article = UserNewsArticle.find(params[:article])
+    @user_articles = UserNewsArticle.where(user_id: current_user.id)
+    @user_article = UserNewsArticle.find(params[:user_article])
     @bookmark = Bookmark.new(bookmark_params)
     authorize @bookmark
     @bookmark.user = current_user

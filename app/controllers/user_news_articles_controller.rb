@@ -242,4 +242,15 @@ class UserNewsArticlesController < ApplicationController
     end
     @ap_user_articles
   end
+
+  def destroy
+    user_article = UserNewsArticle.find(params[:id])
+    authorize user_article
+    if user_article.destroy
+      flash[:notice] = "UserNewsArticle was successfully deleted."
+    else
+      flash[:alert] = "Error deleting UserNewsArticle."
+    end
+    redirect_to user_news_articles_path, status: :see_other
+  end
 end

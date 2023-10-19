@@ -6,24 +6,24 @@
       <h2><%= user_article.title if user_article.title.present? %></a></h2>
     <p><%= user_article.content[..40] if user_article.content.present? %>...Click to read more... <strong> <%= user_article.published if user_article.published.present?%> </strong></p>
     <div class="d-flex mt-3">
-      <%# <%= link_to news_user_article_path(user_article), class: "btn btn-secondary", data: { turbo_method: :delete, turbo_confirm: "Delete #{user_article.title}?" } do %>
+      <%= link_to  user_news_article_path(user_article), class: "btn btn-secondary", data: { turbo_method: :delete, turbo_confirm: "Delete #{user_article.title}?" } do %>
         <i class="fa-solid fa-trash-can" data-action="click->read#delete"></i>
-        <%# <% end %>
-        <div class="checkbox">
-          <div class="form-check">
-            <input autocomplete="off" name="read" type="hidden" value="0">
-            <input class="form-check-input" id="read_<%= user_article.id %>" name="read" type="checkbox" value="1" data-action="change->read#read">
-            <label class="form-check-label" for="read_<%= user_article.id %>">Read</label>
-          </div>
+      <% end %>
+      <div class="checkbox">
+        <div class="form-check">
+          <input autocomplete="off" name="read" type="hidden" value="0">
+          <input class="form-check-input" id="read_<%= user_article.id %>" name="read" type="checkbox" value="1" data-action="change->read#read">
+          <label class="form-check-label" for="read_<%= user_article.id %>">Read</label>
         </div>
-        <div data-read-target="bookmark">
-          <% if user_signed_in? %>
-            <%= link_to bookmarks_create_path(user_article: user_article) do %>
-              <i class="fa-regular fa-bookmark" data-action="click->read#bookmark"></i>
-            <% end %>
+      </div>
+      <div data-read-target="bookmark">
+        <% if user_signed_in? %>
+          <%= link_to bookmarks_create_path(user_article: user_article) do %>
+            <i class="fa-regular fa-bookmark" data-action="click->read#bookmark"></i>
           <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 </div>

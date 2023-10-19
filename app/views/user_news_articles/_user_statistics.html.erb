@@ -14,7 +14,7 @@
       <li>NYT: <%= @nyt_user_articles.count if @nyt_user_articles.present? %> articles</li>
       <li>Japan Times: <%= @japan_times_user_articles.count if @japan_times_user_articles.present? %> articles</li>
     </ul>
-    <%= render 'js_converter' %>
+    <%= render 'user_js_converter' %>
     <div class="d-flex justify-content-center">
       <div class="align-self-center pie-button">
         <button type="button" class="btn btn-primary"  data-action="click->pie#fire">Show Pie Chart</button>
