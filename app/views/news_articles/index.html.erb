@@ -63,7 +63,7 @@
                   <% @articles.each do |article| %>
                     <%# enclose the entire div as a link to the article website %>
                     <div class="<%= article == @articles.first ? 'carousel-item active carousel-img' : 'carousel-item carousel-img'%>">
-                      <%= render 'headline', article: article %>
+                      <%= render 'search_results_card', article: article %>
                     </div>
                   <% end %>
                 </div>
