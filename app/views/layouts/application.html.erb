@@ -24,7 +24,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags%>
+    <%= javascript_importmap_tags nonce: content_security_policy_nonce %>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
