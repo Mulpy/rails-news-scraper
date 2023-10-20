@@ -15,7 +15,7 @@ export default class extends Controller {
     const newsArticles = {
       "BBC": parseInt(jsBbc),
       "Politico": parseInt(jsPolitico),
-      "Al Jazeera": parseInt(jsAlJazeera),
+      // "Al Jazeera": parseInt(jsAlJazeera),
       "NYT": parseInt(jsNyt),
       "Japan Times": parseInt(jsJapanTimes),
       "AP": parseInt(jsAp)
@@ -41,7 +41,7 @@ export default class extends Controller {
           backgroundColor: [
             'rgb(255, 160, 122)',
             'rgb(211, 211, 211)',
-            'rgb(250, 250, 210)',
+            // 'rgb(250, 250, 210)',
             'rgb(173, 216, 230)',
             'rgb(32, 178, 170)',
             'rgb(255, 182, 193)'

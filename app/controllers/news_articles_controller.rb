@@ -14,12 +14,12 @@ class NewsArticlesController < ApplicationController
       NewsArticle.destroy_all
       scrape_bbc
       scrape_politico
-      scrape_al_jazeera
       scrape_nyt
       scrape_japan_times
       scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
+      # scrape_al_jazeera
       # scrape_cnn
       # scrape_reuters
       # scrape_bloomberg
@@ -204,28 +204,28 @@ class NewsArticlesController < ApplicationController
   #   raise
   # end
 
-  def scrape_al_jazeera
-    if params[:search].present?
-      @al_jazeera_articles = []
-      url = "https://www.aljazeera.com/search/#{params[:search][:query].split.join('%20')}"
-      html_file = URI.open(url).read
-      html_doc = Nokogiri::HTML.parse(html_file)
-      html_doc.search('article').each do |element|
-        doc = Nokogiri::HTML(element.inner_html)
-        al_jazeera_title = doc.css('span').first.text
-        al_jazeera_content = doc.css('p').present? ? doc.css('p').first.text : nil
-        al_jazeera_link = doc.css('a').first.attr('href')
-        al_jazeera_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
-        al_jazeera_published = doc.css('span.screen-reader-text').text
-        begin
-          @al_jazeera_articles << NewsArticle.create!(source: 'Al Jazeera', title: al_jazeera_title, content: al_jazeera_content, image: al_jazeera_image, link: al_jazeera_link, published: al_jazeera_published)
-        rescue ActiveRecord::RecordInvalid => e
-          puts "Error creating NewsArticle: #{e.message}"
-        end
-      end
-    end
-    @al_jazeera_articles
-  end
+  # def scrape_al_jazeera
+  #   if params[:search].present?
+  #     @al_jazeera_articles = []
+  #     url = "https://www.aljazeera.com/search/#{params[:search][:query].split.join('%20')}"
+  #     html_file = URI.open(url).read
+  #     html_doc = Nokogiri::HTML.parse(html_file)
+  #     html_doc.search('article').each do |element|
+  #       doc = Nokogiri::HTML(element.inner_html)
+  #       al_jazeera_title = doc.css('span').first.text
+  #       al_jazeera_content = doc.css('p').present? ? doc.css('p').first.text : nil
+  #       al_jazeera_link = doc.css('a').first.attr('href')
+  #       al_jazeera_image = doc.css('img').present? ? doc.css('img').first.attr('src') : nil
+  #       al_jazeera_published = doc.css('span.screen-reader-text').text
+  #       begin
+  #         @al_jazeera_articles << NewsArticle.create!(source: 'Al Jazeera', title: al_jazeera_title, content: al_jazeera_content, image: al_jazeera_image, link: al_jazeera_link, published: al_jazeera_published)
+  #       rescue ActiveRecord::RecordInvalid => e
+  #         puts "Error creating NewsArticle: #{e.message}"
+  #       end
+  #     end
+  #   end
+  #   @al_jazeera_articles
+  # end
 
   def scrape_japan_times
     if params[:search].present?

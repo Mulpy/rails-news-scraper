@@ -9,15 +9,15 @@ class UserNewsArticlesController < ApplicationController
       @user_articles.destroy_all
       scrape_bbc
       scrape_politico
-      scrape_al_jazeera
       scrape_nyt
       scrape_japan_times
       scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
-      # @user_articles += scrape_cnn
-      # @user_articles += scrape_reuters
-      # @user_articles += scrape_bloomberg
+      # scrape_al_jazeera
+      # scrape_cnn
+      # scrape_reuters
+      # scrape_bloomberg
     end
     @user_articles
   end
