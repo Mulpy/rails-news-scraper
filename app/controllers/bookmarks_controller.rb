@@ -28,7 +28,10 @@ class BookmarksController < ApplicationController
     @bookmark.source = @user_article.source
     @bookmark.image = @user_article.image
     @bookmark.published = @user_article.published
-    if @bookmark.save
+    if bookmarked?
+      flash[:notice] = 'This article is already bookmarked.'
+      redirect_to user_news_articles_path, status: :see_other
+    elsif @bookmark.save
       redirect_to user_news_articles_path, status: :see_other
     else
       render :new, status: :unprocessable_entity
@@ -40,6 +43,12 @@ class BookmarksController < ApplicationController
     authorize bookmark
     bookmark.destroy
     redirect_to bookmarks_path, status: :see_other
+  end
+
+  def bookmarked?
+    @user_article = UserNewsArticle.find(params[:user_article])
+    @bookmarks = Bookmark.where(user_id: current_user.id)
+    @bookmarks.any? { |bookmark| bookmark.url == @user_article.link }
   end
 
   private

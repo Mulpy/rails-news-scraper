@@ -3,6 +3,6 @@ class Bookmark < ApplicationRecord
   validates :url, presence: true
   validates :title, presence: true
   validates :user_id, presence: true
-  validates :url, uniqueness: { scope: :user_id, message: "already bookmarked" }
+  validates :user_id, uniqueness: { scope: :url, message: "already bookmarked" }
   validates :source, presence: true
 end

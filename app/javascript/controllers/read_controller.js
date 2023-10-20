@@ -17,6 +17,9 @@ export default class extends Controller {
   }
 
   bookmark() {
-    this.bookmarkTarget.classList.innerHTML = `<i class="fa-solid fa-bookmark"></i>`;
+    this.preventDefault();
+    this.bookmarkTarget.innerHTML = `
+    <i class="fa-solid fa-bookmark fa-2xl"></i>
+    `;
   }
 }
