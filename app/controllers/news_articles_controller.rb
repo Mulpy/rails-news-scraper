@@ -13,10 +13,10 @@ class NewsArticlesController < ApplicationController
     if params[:search].present?
       NewsArticle.destroy_all
       scrape_bbc
-      # scrape_politico
-      # scrape_nyt
-      # scrape_japan_times
-      # scrape_ap
+      scrape_politico
+      scrape_nyt
+      scrape_japan_times
+      scrape_ap
 
       # Difficult to scrape websites --------------------------------------------------
       # scrape_al_jazeera
@@ -25,7 +25,7 @@ class NewsArticlesController < ApplicationController
       # scrape_bloomberg
     else
       NewsArticle.destroy_all
-      # scrape_google
+      scrape_google
     end
     @articles
   end

@@ -14,7 +14,7 @@
   </div>
   <div>
     <% if bookmark.reader_comment.present? %>
-      <p><strong><%= current_user.username.strip %>'s Comment: <%= bookmark.reader_comment %></strong></p>
+      <p><strong><%= current_user.username.strip %>'s Comment: "<%= bookmark.reader_comment %>"</strong></p>
     <% end %>
     <% if bookmark.rating.present? %>
         <%= bookmark.rating.times do  %>
