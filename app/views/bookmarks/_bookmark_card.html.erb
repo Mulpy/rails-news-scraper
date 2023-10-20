@@ -5,9 +5,16 @@
     <h2><%= bookmark.title if bookmark.title.present? %></a></h2>
   <p><%= bookmark.content[..40] if bookmark.content.present? %>...Click to read more... <strong> <%= bookmark.published if bookmark.published.present?%> </strong></p>
   <div class="d-flex mt-3">
-    <%= link_to bookmark_path(bookmark), class: "btn btn-secondary", data: { turbo_method: :delete, turbo_confirm: "Delete #{bookmark.title}?" } do %>
+    <%= link_to bookmark_path(bookmark), class: "btn btn-secondary mr-5", data: { turbo_method: :delete, turbo_confirm: "Delete #{bookmark.title}?" } do %>
       <i class="fa-solid fa-trash-can"></i>
     <% end %>
+    <%= link_to edit_bookmark_path(bookmark), class: "btn btn-secondary ml-5" do %>
+      <i class="fa-solid fa-marker fa-2xl"></i>
+    <% end %>
+  </div>
+  <div>
+    <p><%= current_user.username.strip %>'s Comment: <%= bookmark.reader_comment if bookmark.reader_comment.present? %></p>
+    <p>Rating: <%= bookmark.rating if bookmark.rating.present? %></p>
   </div>
 </div>
 </div>

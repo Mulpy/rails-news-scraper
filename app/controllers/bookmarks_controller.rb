@@ -19,7 +19,7 @@ class BookmarksController < ApplicationController
   def create
     @user_articles = UserNewsArticle.where(user_id: current_user.id)
     @user_article = UserNewsArticle.find(params[:user_article])
-    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark = Bookmark.new(create_params)
     authorize @bookmark
     @bookmark.user = current_user
     @bookmark.url = @user_article.link
@@ -38,6 +38,21 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def edit
+    @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
+  end
+
+  def update
+    @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
+    if @bookmark.update(update_params)
+      redirect_to bookmarks_path, status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     bookmark = Bookmark.find(params[:id])
     authorize bookmark
@@ -53,7 +68,11 @@ class BookmarksController < ApplicationController
 
   private
 
-  def bookmark_params
-    params.permit(:url, :title, :content, :source, :image, :published, :user_id, :rating, :reader_comment)
+  def create_params
+    params.permit(:url, :title, :content, :source, :image, :published, :user_id)
+  end
+
+  def update_params
+    params.require(:bookmark).permit(:rating, :reader_comment)
   end
 end

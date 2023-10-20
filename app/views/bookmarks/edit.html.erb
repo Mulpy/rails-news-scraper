@@ -1,0 +1,11 @@
+<div class="container mt-5 pt-3">
+  <div class="row">
+    <div class="col-xs-4">
+      <%= simple_form_for @bookmark do |f| %>
+        <%= f.input :reader_comment, label: "Add a comment" %>
+        <%= f.input :rating, collection: (1..5).to_a, label: "Rate this article" %>
+        <%= f.submit "Add your comments", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
