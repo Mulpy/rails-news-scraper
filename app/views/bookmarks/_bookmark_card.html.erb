@@ -13,8 +13,14 @@
     <% end %>
   </div>
   <div>
-    <p><%= current_user.username.strip %>'s Comment: <%= bookmark.reader_comment if bookmark.reader_comment.present? %></p>
-    <p>Rating: <%= bookmark.rating if bookmark.rating.present? %></p>
+    <% if bookmark.reader_comment.present? %>
+      <p><strong><%= current_user.username.strip %>'s Comment: <%= bookmark.reader_comment %></strong></p>
+    <% end %>
+    <% if bookmark.rating.present? %>
+        <%= bookmark.rating.times do  %>
+          <i class="fa-solid fa-star fa-bounce fa-lg"></i>
+        <% end %>
+    <% end %>
   </div>
 </div>
 </div>

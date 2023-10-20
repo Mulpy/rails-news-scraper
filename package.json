@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "star-rating.js": "^4.3.0"
   }
 }
