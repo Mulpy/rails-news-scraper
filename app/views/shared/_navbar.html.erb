@@ -19,6 +19,8 @@
       <%= link_to bookmarks_path, class: "navbar-brand" do %>
         <i class="fa-solid fa-bookmark fa-2xl"></i>
       <% end %>
+      <% else %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

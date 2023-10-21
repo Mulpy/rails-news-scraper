@@ -12,6 +12,13 @@ class ChatroomPolicy < ApplicationPolicy
 
   def show?
     true
-    # user.present? && record.users.include?(user)
+  end
+
+  def new?
+    create?
+  end
+
+  def create?
+    true
   end
 end

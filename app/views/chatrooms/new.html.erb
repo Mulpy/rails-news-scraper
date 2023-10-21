@@ -1,0 +1,20 @@
+<div class="container mt-5 pt-3">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-4">
+      <h2>Add a Chatroom</h2>
+        <%= simple_form_for @chatroom do |f| %>
+          <%= f.error_notification %>
+          <div class="form-inputs">
+            <%= f.input :name,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "name" },
+                      label: "Name"%>
+          </div>
+          <div class="form-actions">
+            <%= f.button :submit, "Add", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
