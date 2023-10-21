@@ -1,0 +1,14 @@
+<div class="container chatroom">
+  <h1>Chatrooms</h1>
+  <div class="chatrooms">
+    <% if @chatrooms.present? %>
+      <% @chatrooms.each do |chatroom| %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+            <%= chatroom.name.capitalize %>
+        </div>
+      <% end %>
+    <% else %>
+      <h1>No chatrooms yet - be the first to create one!</h1>
+    <% end %>
+  </div>
+</div>
