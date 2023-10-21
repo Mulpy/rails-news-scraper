@@ -6,7 +6,9 @@ class ChatroomsController < ApplicationController
   def show
     @chatrooms = policy_scope(Chatroom).all
     @chatroom = Chatroom.find(params[:id])
+    @message = Message.new
     authorize @chatroom
+    authorize @message
   end
 
   def new

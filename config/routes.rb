@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :news_articles, only: %i[index show]
   resources :user_news_articles, only: %i[index destroy]
   resources :bookmarks
-  resources :chatrooms, only: %i[index show new create]
-  resources :messages, only: :create
-
+  resources :chatrooms, only: %i[index show new create] do
+    resources :messages, only: :create
+  end
 end
