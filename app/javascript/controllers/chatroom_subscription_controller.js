@@ -14,6 +14,7 @@ export default class extends Controller {
   }
 
   #insertMessageAndScrollDown(data) {
+    const nonce = this.data.get("myControllerNonce")
     this.messagesTarget.insertAdjacentHTML("beforeend", data)
     // scroll to bottom of messages list
     this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)

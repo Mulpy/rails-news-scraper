@@ -1,5 +1,6 @@
 <div class="container chatroom mt-5 mb-5" data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+  data-my-controller-nonce="<%= content_security_policy_nonce %>"
 >
   <h1>#<%= @chatroom.name %></h1>
   <div class="messages" data-chatroom-subscription-target="messages">
