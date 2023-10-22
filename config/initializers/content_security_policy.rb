@@ -6,6 +6,7 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
+    # Allow loading from our own domain and HTTPS only
     policy.default_src :self, :https
     policy.font_src    :self, "https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIOOaBXso.woff2",
       "https://fonts.gstatic.com/s/nunito/v26/XRXV3I6Li01BKofIMeaBXso.woff2",
@@ -15,22 +16,26 @@ Rails.application.configure do
       "https://fonts.gstatic.com/s/worksans/v19/QGYsz_wNahGAdqQ43Rh_c6Dpp_k.woff2",
       "https://fonts.gstatic.com/s/worksans/v19/QGYsz_wNahGAdqQ43Rh_cqDpp_k.woff2",
       "https://fonts.gstatic.com/s/worksans/v19/QGYsz_wNahGAdqQ43Rh_fKDp.woff2"  # , :https, :data
+    # Allow images from our own domain and HTTPS
     policy.img_src     :self, :https, :data
+    # Forbid <object>, <embed>, and other legacy tags
     policy.object_src  :none
-    policy.script_src  :self, "https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.esm.js" # , :https # , :unsafe_inline
+    # Specify scripts and styles allowed to run
+    policy.script_src  'nonce-rAnd0m123' 'strict-dynamic', :https, 'unsafe-inline' # :self, "https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.esm.js" # , :https # , :unsafe_inline
     policy.style_src   :self,  "https://fonts.googleapis.com/css",  # ?family=Nunito:400,700|Work+Sans:400,700&display=swap
       "https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css" # , :https
-    policy.base_uri    :self  # , :https
+    policy.base_uri    :none  # :self  # , :https
+    policy.require_trusted_types_for 'script'
     #  # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
   end
 
   # Generate session nonces for permitted importmap and inline scripts
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  # config.content_security_policy_nonce_directives = %w(script-src)
+  config.content_security_policy_nonce_directives = %w(script-src)
 
   # Report violations without enforcing the policy.
-  # config.content_security_policy_report_only = true
+  config.content_security_policy_report_only = true
 end
 
 =begin
