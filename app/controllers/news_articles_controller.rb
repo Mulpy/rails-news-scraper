@@ -25,7 +25,7 @@ class NewsArticlesController < ApplicationController
       # scrape_bloomberg
     else
       NewsArticle.destroy_all
-      # scrape_google
+      scrape_google
     end
     @articles
   end
