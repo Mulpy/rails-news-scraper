@@ -12,6 +12,9 @@
       <% end %>
     <% else %>
       <h1>No chatrooms yet - be the first to create one!</h1>
+      <% link_to new_chatroom_path do %>
+    <button class="btn btn-primary">+Add Chatroom+</button>
+  <% end %>
     <% end %>
   </div>
 </div>
