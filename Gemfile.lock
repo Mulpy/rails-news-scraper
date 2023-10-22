@@ -214,6 +214,7 @@ GEM
     rake (13.0.6)
     rdoc (6.5.0)
       psych (>= 4.0.0)
+    redis (4.8.1)
     regexp_parser (2.8.1)
     reline (0.3.8)
       io-console (~> 0.5)
@@ -302,6 +303,7 @@ DEPENDENCIES
   puma (~> 5.0)
   pundit
   rails (~> 7.0.7, >= 7.0.7.2)
+  redis (~> 4.0)
   sassc-rails
   selenium-webdriver
   serviceworker-rails
