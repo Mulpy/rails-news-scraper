@@ -21,7 +21,8 @@ Rails.application.configure do
     # Forbid <object>, <embed>, and other legacy tags
     policy.object_src  :none
     # Specify scripts and styles allowed to run
-    policy.script_src  'nonce-rAnd0m123' 'strict-dynamic', :https, 'unsafe-inline' # :self, "https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.esm.js" # , :https # , :unsafe_inline
+    policy.script_src  'nonce-rAnd0m123' 'strict-dynamic', :https, 'unsafe-inline'
+    # 'http://127.0.0.1:3000/assets/es-module-shims.min-4ca9b3dd5e434131e3bb4b0c1d7dff3bfd4035672a5086deec6f73979a49be73.js' # :self, "https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.esm.js" # , :https # , :unsafe_inline
     policy.style_src   :self,  "https://fonts.googleapis.com/css",  # ?family=Nunito:400,700|Work+Sans:400,700&display=swap
       "https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css" # , :https
     policy.base_uri    :none  # :self  # , :https
@@ -32,7 +33,7 @@ Rails.application.configure do
 
   # Generate session nonces for permitted importmap and inline scripts
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src)
+  config.content_security_policy_nonce_directives = %w(script)
 
   # Report violations without enforcing the policy.
   config.content_security_policy_report_only = true
